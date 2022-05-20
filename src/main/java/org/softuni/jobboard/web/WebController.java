@@ -25,15 +25,9 @@ public class WebController {
     public String addOffer() {
         return "add-offer";
     }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping("/register")
-    public String register() {
-        return "register";
+    @GetMapping("/users/profile")
+    public String profile() {
+        return "profile";
     }
 
     @GetMapping("/logout")
