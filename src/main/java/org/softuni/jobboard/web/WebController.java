@@ -25,13 +25,5 @@ public class WebController {
     public String addOffer() {
         return "add-offer";
     }
-    @GetMapping("/users/profile")
-    public String profile() {
-        return "profile";
-    }
 
-    @GetMapping("/logout")
-    public String logout() {
-        return "redirect:/";
-    }
 }

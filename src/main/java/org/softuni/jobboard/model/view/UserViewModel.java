@@ -1,14 +1,11 @@
 package org.softuni.jobboard.model.view;
 
-import org.softuni.jobboard.model.entity.enums.LevelEnum;
-
 public class UserViewModel {
 
     private Long id;
-    private String fullName;
-    private String username;
-    private Integer age;
-    private LevelEnum level;
+    private String firstName;
+    private String lastName;
+
 
     public UserViewModel() {
     }
@@ -22,39 +19,21 @@ public class UserViewModel {
         return this;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public UserViewModel setFullName(String fullName) {
-        this.fullName = fullName;
+    public UserViewModel setFirstName(String firstName) {
+        this.firstName = firstName;
         return this;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLastName() {
+        return lastName;
     }
 
-    public UserViewModel setUsername(String username) {
-        this.username = username;
-        return this;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public UserViewModel setAge(Integer age) {
-        this.age = age;
-        return this;
-    }
-
-    public LevelEnum getLevel() {
-        return level;
-    }
-
-    public UserViewModel setLevel(LevelEnum level) {
-        this.level = level;
+    public UserViewModel setLastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 }

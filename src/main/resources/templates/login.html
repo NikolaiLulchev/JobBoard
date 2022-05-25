@@ -16,15 +16,19 @@
 <header th:replace="fragments/commons::navigation"></header>
 
 User Login page. Both for ITs and Companies.
-<form>
+<form class="container"
+        th:action="@{/users/login}"
+        th:method="post"
+        th:object="${userLoginBindingModel}">
+
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="username">
+        <input type="text" th:field="*{username}" class="form-control" placeholder="username">
 
     </div>
     <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" th:field="*{password}" class="form-control" placeholder="Password">
 
     </div>
 

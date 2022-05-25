@@ -24,24 +24,27 @@ Register as IT or Company.
           th:object="${userRegisterBindingModel}">
         <h2>Register</h2>
         <p class="hint-text">Create your account. It's free and only takes a minute.</p>
-        <div class="form-group">
+        <div class="container form-group">
 
-            <input th:field="*{username}" type="text" class="form-control" name="username" placeholder="Username" required="required">
+            <input th:field="*{username}" type="text" class="form-control" name="username" placeholder="Username"
+                   required="required">
 
-            <div class="row">
-                <div class="col"><input th:field="*{firstName}" type="text" class="form-control" name="first_name" placeholder="First Name"
-                                        required="required"></div>
-                <div class="col"><input th:field="*{lastName}" type="text" class="form-control" name="last_name" placeholder="Last Name"
-                                        required="required"></div>
-            </div>
+            <input th:field="*{firstName}" type="text" class="form-control" name="first_name" placeholder="First Name"
+                   required="required">
+
+            <input th:field="*{lastName}" type="text" class="form-control" name="last_name" placeholder="Last Name"
+                   required="required">
 
 
-            <input th:field="*{email}" type="email" class="form-control" name="email" placeholder="Email" required="required">
+            <input th:field="*{email}" type="email" class="form-control" name="email" placeholder="Email"
+                   required="required">
 
-            <input th:field="*{password}" type="password" class="form-control" name="password" placeholder="Password" required="required"
+            <input th:field="*{password}" type="password" class="form-control" name="password" placeholder="Password"
+                   required="required"
                    aria-autocomplete="list">
 
-            <input th:field="*{confirmPassword}" type="password" class="form-control" name="confirm_password" placeholder="Confirm Password"
+            <input th:field="*{confirmPassword}" type="password" class="form-control" name="confirm_password"
+                   placeholder="Confirm Password"
                    required="required">
 
             <button type="submit" class="w-100 btn btn-lg btn-primary">Register Now</button>
