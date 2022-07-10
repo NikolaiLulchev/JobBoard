@@ -29,7 +29,8 @@ public class JobboardUserDetailsService implements UserDetailsService {
     private UserDetails map(UserEntity userEntity) {
 
         return new JobboardUserDetails(
-                userEntity.getId(), userEntity.getPassword(),
+                userEntity.getId(),
+                userEntity.getPassword(),
                 userEntity.getUsername(),
                 userEntity.getFirstName(),
                 userEntity.getLastName(),

@@ -4,6 +4,8 @@ import org.softuni.jobboard.model.enums.GenderEnum;
 import org.softuni.jobboard.model.enums.LevelEnum;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,17 +24,26 @@ public class UserEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<UserRoleEntity> role;
+    private Set<UserRoleEntity> role = new HashSet<>();
     @Enumerated(EnumType.STRING)
     private LevelEnum level;
     @ManyToMany
-    private List<TechStackEntity> techStack;
+    private List<TechStackEntity> techStack = new ArrayList<>();
     @Column(nullable = false)
     private String firstName;
     @Column(nullable = false)
     private String lastName;
 
     public UserEntity() {
+    }
+
+    public List<TechStackEntity> getTechStack() {
+        return techStack;
+    }
+
+    public UserEntity setTechStack(List<TechStackEntity> techStack) {
+        this.techStack = techStack;
+        return this;
     }
 
     public String getUsername() {

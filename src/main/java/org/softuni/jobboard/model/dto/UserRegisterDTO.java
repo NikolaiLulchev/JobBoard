@@ -10,10 +10,8 @@ import org.softuni.jobboard.model.validation.UniqueUsername;
 )
 public class UserRegisterDTO {
 
-    private Integer age;
     private String email;
     private String firstName;
-    private String gender;
     private String lastName;
     private String password;
     private String confirmPassword;
@@ -57,24 +55,6 @@ public class UserRegisterDTO {
 
     public UserRegisterDTO setEmail(String email) {
         this.email = email;
-        return this;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public UserRegisterDTO setAge(Integer age) {
-        this.age = age;
-        return this;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public UserRegisterDTO setGender(String gender) {
-        this.gender = gender;
         return this;
     }
 

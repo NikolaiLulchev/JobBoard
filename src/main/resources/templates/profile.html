@@ -1,17 +1,14 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="fragments/commons::head"></head>
 <body>
 <header th:replace="fragments/commons::navigation"></header>
 
 
-<div class="profile-card p-3 py-4" th:object="${userDetails}">
+<div class="profile-card p-3 py-4" th:object="${userViewModel}">
     <div class="text-center mt-3">
 
-        Welcome,
-        <span th:text="*{firstName}">UI/UX Designer</span>
-        <span th:text="*{lastName}">UI/UX Designer</span>
-        !
         <div class="container rounded bg-white mt-5 mb-5">
             <div class="row">
                 <div class="col-md-3 border-right">
@@ -65,10 +62,10 @@
                                                                                             class="form-control"
                                                                                             placeholder="enter address line 2"
                                                                                             value=""></div>
-                            <div class="col-md-12"><label class="labels">Email ID</label><input type="text"
+                            <div class="col-md-12"><label class="labels">Email</label><input type="text"
                                                                                                 class="form-control"
                                                                                                 placeholder="enter email id"
-                                                                                                value=""></div>
+                                                                                                th:value="*{email}"></div>
                             <div class="col-md-12"><label class="labels">Education</label><input type="text"
                                                                                                  class="form-control"
                                                                                                  placeholder="education"
