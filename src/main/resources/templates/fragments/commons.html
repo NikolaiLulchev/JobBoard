@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="head">
     <meta charset="utf-8">
@@ -17,19 +19,26 @@
 <body>
 
 <header th:fragment="navigation">
-    <nav class="nav nav-inline">
-        <th:block th:if="${@currentUser.id==null}">
-            <a class="nav-link" href="/home">Home</a>
+    <nav class="nav nav-item">
+        <a class="nav-link" href="/home">Home</a>
+        <th:block sec:authorize="!isAuthenticated()" >
             <a class="nav-link" href="/users/login">Log in</a>
             <a class="nav-link" href="/users/register">Register</a>
-            <a class="nav-link" href="/about">About Us</a>
         </th:block>
-        <th:block th:object="${@currentUser}" th:unless="${@currentUser.id==null}">
+        <th:block sec:authorize="isAuthenticated()">
             <a class="nav-link" href="/offers">Offers</a>
             <a class="nav-link" href="/add-offer">Add Offer</a>
-            <a class="nav-link" th:href="@{/users/profile/{id}(id=*{id})}">Profile</a>
-            <a class="nav-link" href="/users/logout">Logout</a>
+            <a class="nav-link" th:href="@{/users/profile/}">Profile</a>
+            <li class="nav-link" sec:authorize="isAuthenticated()">
+                <div class="form-inline my-2 my-lg-0 px-3">
+                    <form th:action="@{/users/logout}" th:method="post">
+                        <input class="btn btn-link nav-link" type="submit" value="Logout">
+                    </form>
+                    <div>Welcome, <th:block th:text="${#authentication.principal.fullName}">X</th:block>!</div>
+                </div>
+            </li>
         </th:block>
+        <a class="nav-link" href="/about">About Us</a>
 
 
     </nav>

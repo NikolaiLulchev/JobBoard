@@ -1,7 +1,7 @@
 package org.softuni.jobboard.model.service;
 
-import org.softuni.jobboard.model.entity.Role;
-import org.softuni.jobboard.model.entity.enums.LevelEnum;
+import org.softuni.jobboard.model.entity.UserRoleEntity;
+import org.softuni.jobboard.model.enums.LevelEnum;
 
 import java.util.Set;
 
@@ -14,7 +14,7 @@ public class UserServiceModel {
     private String firstName;
     private String lastName;
     private String password;
-    private Set<Role> role;
+    private Set<UserRoleEntity> role;
     private LevelEnum level;
 
     public UserServiceModel() {
@@ -83,11 +83,11 @@ public class UserServiceModel {
         return this;
     }
 
-    public Set<Role> getRole() {
+    public Set<UserRoleEntity> getRole() {
         return role;
     }
 
-    public UserServiceModel setRole(Set<Role> role) {
+    public UserServiceModel setRole(Set<UserRoleEntity> role) {
         this.role = role;
         return this;
     }

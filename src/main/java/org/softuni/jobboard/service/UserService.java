@@ -1,17 +1,57 @@
 package org.softuni.jobboard.service;
 
-import org.softuni.jobboard.model.service.UserServiceModel;
+import org.softuni.jobboard.model.dto.UserRegisterDTO;
+import org.softuni.jobboard.model.entity.UserEntity;
+import org.softuni.jobboard.model.mapper.UserMapper;
+import org.softuni.jobboard.repository.UserRepository;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
-public interface UserService {
-    void registerUser(UserServiceModel userServiceModel);
+@Service
+public class UserService {
 
-    UserServiceModel findByUsernameAndPassword(String username, String password);
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
+  private final UserMapper userMapper;
+  private final UserDetailsService userDetailsService;
 
-    void loginUser(Long id, String username);
+  public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserMapper userMapper, UserDetailsService userDetailsService) {
+    this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
+    this.userMapper = userMapper;
+    this.userDetailsService = userDetailsService;
+  }
 
-    void logout();
 
-    UserServiceModel findById(Long id);
+  public void registerAndLogin(UserRegisterDTO userRegisterDTO) {
 
-    boolean isNameExists(String username);
+    UserEntity newUser = userMapper.userDtoToUserEntity(userRegisterDTO);
+    newUser.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
+
+    this.userRepository.save(newUser);
+    login(newUser);
+  }
+
+
+  private void login(UserEntity userEntity) {
+    UserDetails userDetails =
+        userDetailsService.loadUserByUsername(userEntity.getUsername());
+
+    Authentication auth =
+        new UsernamePasswordAuthenticationToken(
+            userDetails,
+            userDetails.getPassword(),
+            userDetails.getAuthorities()
+        );
+
+    SecurityContextHolder.
+        getContext().
+        setAuthentication(auth);
+  }
+
 }

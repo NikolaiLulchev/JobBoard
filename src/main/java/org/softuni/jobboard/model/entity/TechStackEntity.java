@@ -1,6 +1,6 @@
 package org.softuni.jobboard.model.entity;
 
-import org.softuni.jobboard.model.entity.enums.TechStackEnum;
+import org.softuni.jobboard.model.enums.TechStackEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,19 +9,19 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tech_stack")
-public class TechStack extends BaseEntity{
+public class TechStackEntity extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     private TechStackEnum techStack;
 
-    public TechStack() {
+    public TechStackEntity() {
     }
 
     public TechStackEnum getTechStack() {
         return techStack;
     }
 
-    public TechStack setTechStack(TechStackEnum techStack) {
+    public TechStackEntity setTechStack(TechStackEnum techStack) {
         this.techStack = techStack;
         return this;
     }

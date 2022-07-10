@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "offers")
-public class Offer extends BaseEntity {
+public class OfferEntity extends BaseEntity {
 
     @ManyToOne
-    private User user;
+    private UserEntity user;
     @Column(nullable = false)
     private String title;
     @Column(nullable = false)

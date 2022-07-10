@@ -33,3 +33,9 @@ spring:
   #api-key: 
   #api-secret: 
   #cloud-name: 
+logging:
+  level:
+    root: "warn"
+    org.springframework.web: "debug"
+    org.springframework.context: "debug"
+    org.hibernate: "info"

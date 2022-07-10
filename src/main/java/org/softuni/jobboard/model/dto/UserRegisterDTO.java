@@ -1,6 +1,14 @@
-package org.softuni.jobboard.model.binding;
+package org.softuni.jobboard.model.dto;
 
-public class UserRegisterBindingModel {
+import org.softuni.jobboard.model.validation.FieldMatch;
+import org.softuni.jobboard.model.validation.UniqueUsername;
+
+@FieldMatch(
+        first = "password",
+        second = "confirmPassword",
+        message = "Passwords do not match."
+)
+public class UserRegisterDTO {
 
     private Integer age;
     private String email;
@@ -9,16 +17,18 @@ public class UserRegisterBindingModel {
     private String lastName;
     private String password;
     private String confirmPassword;
+
+    @UniqueUsername(message = "Username occupied!")
     private String username;
 
-    public UserRegisterBindingModel() {
+    public UserRegisterDTO() {
     }
 
     public String getUsername() {
         return username;
     }
 
-    public UserRegisterBindingModel setUsername(String username) {
+    public UserRegisterDTO setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -27,7 +37,7 @@ public class UserRegisterBindingModel {
         return firstName;
     }
 
-    public UserRegisterBindingModel setFirstName(String firstName) {
+    public UserRegisterDTO setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -36,7 +46,7 @@ public class UserRegisterBindingModel {
         return lastName;
     }
 
-    public UserRegisterBindingModel setLastName(String lastName) {
+    public UserRegisterDTO setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
@@ -45,7 +55,7 @@ public class UserRegisterBindingModel {
         return email;
     }
 
-    public UserRegisterBindingModel setEmail(String email) {
+    public UserRegisterDTO setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -54,7 +64,7 @@ public class UserRegisterBindingModel {
         return age;
     }
 
-    public UserRegisterBindingModel setAge(Integer age) {
+    public UserRegisterDTO setAge(Integer age) {
         this.age = age;
         return this;
     }
@@ -63,7 +73,7 @@ public class UserRegisterBindingModel {
         return gender;
     }
 
-    public UserRegisterBindingModel setGender(String gender) {
+    public UserRegisterDTO setGender(String gender) {
         this.gender = gender;
         return this;
     }
@@ -72,7 +82,7 @@ public class UserRegisterBindingModel {
         return password;
     }
 
-    public UserRegisterBindingModel setPassword(String password) {
+    public UserRegisterDTO setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -81,7 +91,7 @@ public class UserRegisterBindingModel {
         return confirmPassword;
     }
 
-    public UserRegisterBindingModel setConfirmPassword(String confirmPassword) {
+    public UserRegisterDTO setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
         return this;
     }

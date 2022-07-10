@@ -1,7 +1,7 @@
 package org.softuni.jobboard.model.entity;
 
-import org.softuni.jobboard.model.entity.enums.GenderEnum;
-import org.softuni.jobboard.model.entity.enums.LevelEnum;
+import org.softuni.jobboard.model.enums.GenderEnum;
+import org.softuni.jobboard.model.enums.LevelEnum;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
+public class UserEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -22,24 +22,24 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> role;
+    private Set<UserRoleEntity> role;
     @Enumerated(EnumType.STRING)
     private LevelEnum level;
     @ManyToMany
-    private List<TechStack> techStack;
+    private List<TechStackEntity> techStack;
     @Column(nullable = false)
     private String firstName;
     @Column(nullable = false)
     private String lastName;
 
-    public User() {
+    public UserEntity() {
     }
 
     public String getUsername() {
         return username;
     }
 
-    public User setUsername(String username) {
+    public UserEntity setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -48,7 +48,7 @@ public class User extends BaseEntity {
         return password;
     }
 
-    public User setPassword(String password) {
+    public UserEntity setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -57,7 +57,7 @@ public class User extends BaseEntity {
         return email;
     }
 
-    public User setEmail(String email) {
+    public UserEntity setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -66,7 +66,7 @@ public class User extends BaseEntity {
         return age;
     }
 
-    public User setAge(Integer age) {
+    public UserEntity setAge(Integer age) {
         this.age = age;
         return this;
     }
@@ -75,16 +75,16 @@ public class User extends BaseEntity {
         return gender;
     }
 
-    public User setGender(GenderEnum gender) {
+    public UserEntity setGender(GenderEnum gender) {
         this.gender = gender;
         return this;
     }
 
-    public Set<Role> getRole() {
+    public Set<UserRoleEntity> getRole() {
         return role;
     }
 
-    public User setRole(Set<Role> role) {
+    public UserEntity setRole(Set<UserRoleEntity> role) {
         this.role = role;
         return this;
     }
@@ -93,7 +93,7 @@ public class User extends BaseEntity {
         return level;
     }
 
-    public User setLevel(LevelEnum level) {
+    public UserEntity setLevel(LevelEnum level) {
         this.level = level;
         return this;
     }
@@ -102,7 +102,7 @@ public class User extends BaseEntity {
         return firstName;
     }
 
-    public User setFirstName(String firstName) {
+    public UserEntity setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -111,7 +111,7 @@ public class User extends BaseEntity {
         return lastName;
     }
 
-    public User setLastName(String lastName) {
+    public UserEntity setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }

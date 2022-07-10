@@ -1,4 +1,4 @@
-package org.softuni.jobboard.model.entity.enums;
+package org.softuni.jobboard.model.enums;
 
 public enum UserRoleEnum {
     USER, EMPLOYER, ADMIN

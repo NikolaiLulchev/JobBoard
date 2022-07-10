@@ -1,4 +1,4 @@
-package org.softuni.jobboard.model.view;
+package org.softuni.jobboard.model.dto;
 
 public class UserViewModel {
 

@@ -21,7 +21,7 @@ Register as IT or Company.
 <div class="signup-form">
     <form th:action="@{/users/register}"
           th:method="post"
-          th:object="${userRegisterBindingModel}">
+          th:object="${userModel}">
         <h2>Register</h2>
         <p class="hint-text">Create your account. It's free and only takes a minute.</p>
         <div class="container form-group">
