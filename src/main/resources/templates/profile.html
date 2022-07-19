@@ -8,7 +8,7 @@
 
 <div class="profile-card p-3 py-4" th:object="${userViewModel}">
     <form th:action="@{/users/profile/{id}(id=${#authentication.principal.id})}"
-          th:method="delete">
+          th:method="put">
         <div class="text-center mt-3">
             <div class="container rounded bg-white mt-5 mb-5">
                 <div class="row">

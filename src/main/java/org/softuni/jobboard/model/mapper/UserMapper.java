@@ -8,7 +8,9 @@ import org.softuni.jobboard.model.entity.UserEntity;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-UserEntity userDtoToUserEntity(UserRegisterDTO userRegisterDTO);
+    UserEntity userDtoToUserEntity(UserRegisterDTO userRegisterDTO);
 
-UserEntity userDtoToUserEntity(UserViewModel userViewModel);
+    UserEntity userDtoToUserEntity(UserViewModel userViewModel);
+
+    UserViewModel userEntityToUserViewModel(UserEntity userEntity);
 }

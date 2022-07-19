@@ -2,6 +2,7 @@ package org.softuni.jobboard.web;
 
 import org.softuni.jobboard.model.dto.UserViewModel;
 import org.softuni.jobboard.model.entity.UserEntity;
+import org.softuni.jobboard.model.mapper.UserMapper;
 import org.softuni.jobboard.repository.UserRepository;
 import org.softuni.jobboard.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,12 @@ public class UserController {
 
     private final UserService userService;
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserController(UserService userService, UserRepository userRepository, UserMapper userMapper) {
         this.userService = userService;
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @GetMapping("/login")
@@ -42,6 +45,7 @@ public class UserController {
                 user.getFirstName(),
                 user.getLastName()
         );
+//        UserViewModel userViewModel = userMapper.userEntityToUserViewModel(user);
 
         model.addAttribute("userViewModel", userViewModel);
 
@@ -49,7 +53,7 @@ public class UserController {
     }
 
     @PostMapping("/profile/{id}")
-    public String Profile(@PathVariable Long id){
+    public String Profile(@PathVariable Long id) {
         return "home";
     }
 
@@ -62,11 +66,13 @@ public class UserController {
 //        return "home";
 //    }
 
-    @PatchMapping("/profile/{id}")
-    public String editProfile(@PathVariable Long id){
+    @PutMapping("/profile/{id}")
+    public String editProfile(@PathVariable Long id, UserViewModel userViewModel) {
+        UserEntity User = userService.getUserById(id);
+
+        userService.userUpdate(userViewModel);
+
+
         return "home";
     }
-
-//    @PutMapping("/profile/{id}")
-//    public  String profileprofile(@RequestBody )
 }
