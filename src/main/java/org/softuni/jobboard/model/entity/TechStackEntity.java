@@ -17,6 +17,7 @@ public class TechStackEntity extends BaseEntity{
     public TechStackEntity() {
     }
 
+
     public TechStackEnum getTechStack() {
         return techStack;
     }
@@ -24,5 +25,20 @@ public class TechStackEntity extends BaseEntity{
     public TechStackEntity setTechStack(TechStackEnum techStack) {
         this.techStack = techStack;
         return this;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return this.techStack.name();
     }
 }

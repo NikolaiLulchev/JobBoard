@@ -27,7 +27,7 @@ public class UserEntity extends BaseEntity {
     private Set<UserRoleEntity> role = new HashSet<>();
     @Enumerated(EnumType.STRING)
     private LevelEnum level;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<TechStackEntity> techStack = new ArrayList<>();
     @Column(nullable = false)
     private String firstName;
@@ -36,6 +36,7 @@ public class UserEntity extends BaseEntity {
 
     public UserEntity() {
     }
+
 
     public List<TechStackEntity> getTechStack() {
         return techStack;
