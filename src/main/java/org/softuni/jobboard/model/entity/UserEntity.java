@@ -15,22 +15,31 @@ public class UserEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     private String username;
+
     @Column(nullable = false)
     private String password;
+
     @Column
     private String email;
+
     @Column
     private Integer age;
+
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
-    @ManyToMany(fetch = FetchType.EAGER)
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<UserRoleEntity> role = new HashSet<>();
+
     @Enumerated(EnumType.STRING)
     private LevelEnum level;
-    @ManyToMany(fetch = FetchType.EAGER)
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<TechStackEntity> techStack = new ArrayList<>();
+
     @Column(nullable = false)
     private String firstName;
+
     @Column(nullable = false)
     private String lastName;
 

@@ -38,4 +38,6 @@ logging:
     root: "warn"
     org.springframework.web: "debug"
     org.springframework.context: "debug"
-    org.hibernate: "info"
+    org.hibernate: "debug"
+#    org.hibernate.SQL: "debug"
+#    org.hibernate.type.descriptor: "trace"

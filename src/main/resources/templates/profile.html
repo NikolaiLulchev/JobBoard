@@ -8,7 +8,7 @@
 
 <div class="profile-card p-3 py-4" th:object="${userViewModel}">
     <form th:action="@{/users/profile/{id}(id=${#authentication.principal.id})}"
-          th:method="put">
+          th:method="patch">
         <div class="text-center mt-3">
             <div class="container rounded bg-white mt-5 mb-5">
                 <div class="row">
@@ -27,48 +27,59 @@
                                 <h4 class="text-right">Profile Settings</h4>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-6"><label class="labels">Name</label><input type="text"
-                                                                                               name="firstName"
-                                                                                               class="form-control"
-                                                                                               placeholder="first name"
-                                                                                               th:value="*{firstName}">
+                                <div class="col-md-6"><label class="labels">Name</label>
+                                    <input type="text"
+                                           name="firstName"
+                                           class="form-control"
+                                           placeholder="first name"
+                                           th:value="*{firstName}">
                                 </div>
-                                <div class="col-md-6"><label class="labels">Surname</label><input type="text"
-                                                                                                  name="lastName"
-                                                                                                  class="form-control"
-                                                                                                  th:value="*{lastName}"
-                                                                                                  placeholder="surname">
+                                <div class="col-md-6"><label class="labels">Surname</label>
+                                    <input type="text"
+                                           name="lastName"
+                                           class="form-control"
+                                           th:value="*{lastName}"
+                                           placeholder="surname">
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-12"><label class="labels">Email</label><input type="text"
-                                                                                                 name="email"
-                                                                                                 class="form-control"
-                                                                                                 placeholder="enter email id"
-                                                                                                 th:value="*{email}">
+                                <div class="col-md-12"><label class="labels">Email</label>
+                                    <input type="text"
+                                           name="email"
+                                           class="form-control"
+                                           placeholder="enter email"
+                                           th:value="*{email}">
                                 </div>
-                                <div class="col-md-12"><label class="labels">Education</label><input type="text"
-                                                                                                     class="form-control"
-                                                                                                     placeholder="education"
-                                                                                                     value=""></div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-6"><label class="labels">Age</label><input type="number"
-                                                                                              name="age"
-                                                                                              class="form-control"
-                                                                                              placeholder="enter age"
-                                                                                              th:value="*{age}"></div>
-                                <div class="col-md-6"><label class="labels">Gender</label><select class="form-control"
-                                                                                                  id="gender"
-                                                                                                  name="gender">
-                                    <option value="">--Please choose an option--</option>
-                                    <option th:each="g : ${T(org.softuni.jobboard.model.enums.GenderEnum).values()}"
-                                            th:value="${g}"
-                                            th:text="${g}"
-                                            th:selected="${g} == *{gender}"
-                                    >Select level
-                                    </option>
-                                </select>
+                                <div class="row mt-3">
+                                    <div class="col-md-6"><label class="labels">Age</label>
+                                        <input type="number"
+                                               name="age"
+                                               class="form-control"
+                                               placeholder="enter age"
+                                               th:value="*{age}">
+                                    </div>
+                                    <div class="col-md-6"><label class="labels">Gender</label>
+                                        <select class="form-control"
+                                                id="gender"
+                                                name="gender">
+                                            <option value="">--select gender--</option>
+                                            <option th:each="g : ${T(org.softuni.jobboard.model.enums.GenderEnum).values()}"
+                                                    th:value="${g}"
+                                                    th:text="${g}"
+                                                    th:selected="${g.name()} == *{gender}"
+                                            >Select gender
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="labels">User Role</label>
+                                    <br>
+                                    <input type="checkbox" name="role" id="role"
+                                           th:each="r : ${T(org.softuni.jobboard.model.enums.UserRoleEnum).values()}"
+                                           th:text="${r}"
+                                           th:value="${r}"
+                                           th:field="*{role}"/>
                                 </div>
                             </div>
                             <div class="mt-5 text-center">
@@ -80,18 +91,17 @@
                     <div class="col-md-4">
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center experience">
-                                <span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i
-                                    class="fa fa-plus"></i>&nbsp;Experience</span>
+                                <span>Edit Experience</span>
                             </div>
                             <br>
                             <div class="col-md-12">
-                                <label for="level" class="labels">Experience</label>
+                                <label for="level" class="labels">Level</label>
                                 <select class="form-control" id="level" name="level">
-                                    <option value="">--Please choose an option--</option>
+                                    <option value="">--select level--</option>
                                     <option th:each="l : ${T(org.softuni.jobboard.model.enums.LevelEnum).values()}"
                                             th:value="${l}"
                                             th:text="${l}"
-                                            th:selected="${l} == *{level}"
+                                            th:selected="${l.name()} == *{level}"
                                     >Select level
                                     </option>
                                 </select>

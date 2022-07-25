@@ -14,7 +14,11 @@ public class TechStackEntity extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private TechStackEnum techStack;
 
+    public TechStackEntity(TechStackEnum techStackEnum) {
+    }
+
     public TechStackEntity() {
+
     }
 
 

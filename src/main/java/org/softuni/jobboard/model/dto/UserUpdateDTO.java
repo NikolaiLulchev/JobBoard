@@ -1,44 +1,57 @@
 package org.softuni.jobboard.model.dto;
 
-import org.softuni.jobboard.model.entity.TechStackEntity;
 import org.softuni.jobboard.model.enums.GenderEnum;
-import org.softuni.jobboard.model.enums.LevelEnum;
 
 import java.util.List;
+import java.util.Set;
 
-public class UserViewModel {
+public class UserUpdateDTO {
 
+    private Long id;
     private String username;
     private String password;
     private String email;
     private Integer age;
     private GenderEnum gender;
-    private LevelEnum level;
-    private List<TechStackEntity> techStack;
+    private Set<String> role;
+    private String level;
+    private List<String> techStack;
     private String firstName;
     private String lastName;
 
-    public UserViewModel() {
+    public UserUpdateDTO() {
     }
 
-    public UserViewModel(String username, String password, String email, Integer age, GenderEnum gender,
-                         LevelEnum level, List<TechStackEntity> techStack, String firstName, String lastName) {
+    public UserUpdateDTO(Long id, String username, String password, String email,
+                         Integer age, GenderEnum gender, Set<String> role, String level,
+                         List<String> techStack, String firstName, String lastName) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.age = age;
         this.gender = gender;
+        this.role = role;
         this.level = level;
         this.techStack = techStack;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public UserUpdateDTO setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     public String getUsername() {
         return username;
     }
 
-    public UserViewModel setUsername(String username) {
+    public UserUpdateDTO setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -47,7 +60,7 @@ public class UserViewModel {
         return password;
     }
 
-    public UserViewModel setPassword(String password) {
+    public UserUpdateDTO setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -56,7 +69,7 @@ public class UserViewModel {
         return email;
     }
 
-    public UserViewModel setEmail(String email) {
+    public UserUpdateDTO setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -65,7 +78,7 @@ public class UserViewModel {
         return age;
     }
 
-    public UserViewModel setAge(Integer age) {
+    public UserUpdateDTO setAge(Integer age) {
         this.age = age;
         return this;
     }
@@ -74,25 +87,34 @@ public class UserViewModel {
         return gender;
     }
 
-    public UserViewModel setGender(GenderEnum gender) {
+    public UserUpdateDTO setGender(GenderEnum gender) {
         this.gender = gender;
         return this;
     }
 
-    public LevelEnum getLevel() {
+    public Set<String> getRole() {
+        return role;
+    }
+
+    public UserUpdateDTO setRole(Set<String> role) {
+        this.role = role;
+        return this;
+    }
+
+    public String getLevel() {
         return level;
     }
 
-    public UserViewModel setLevel(LevelEnum level) {
+    public UserUpdateDTO setLevel(String level) {
         this.level = level;
         return this;
     }
 
-    public List<TechStackEntity> getTechStack() {
+    public List<String> getTechStack() {
         return techStack;
     }
 
-    public UserViewModel setTechStack(List<TechStackEntity> techStack) {
+    public UserUpdateDTO setTechStack(List<String> techStack) {
         this.techStack = techStack;
         return this;
     }
@@ -101,7 +123,7 @@ public class UserViewModel {
         return firstName;
     }
 
-    public UserViewModel setFirstName(String firstName) {
+    public UserUpdateDTO setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -110,23 +132,8 @@ public class UserViewModel {
         return lastName;
     }
 
-    public UserViewModel setLastName(String lastName) {
+    public UserUpdateDTO setLastName(String lastName) {
         this.lastName = lastName;
         return this;
-    }
-
-    public String getFullName() {
-        StringBuilder fullName = new StringBuilder();
-        if (getFirstName() != null) {
-            fullName.append(getFirstName());
-        }
-        if (getLastName() != null) {
-            if (!fullName.isEmpty()) {
-                fullName.append(" ");
-            }
-            fullName.append(getLastName());
-        }
-
-        return fullName.toString();
     }
 }
