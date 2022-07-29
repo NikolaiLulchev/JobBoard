@@ -136,4 +136,6 @@ public class UserEntity extends BaseEntity {
         this.lastName = lastName;
         return this;
     }
+
+
 }

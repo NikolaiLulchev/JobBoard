@@ -59,8 +59,8 @@ public class UserController {
     public String Profile(@PathVariable Long id, UserUpdateDTO userUpdateDTO) {
         UserEntity user = userService.getUserById(id);
         userService.updateUser(user, userUpdateDTO);
-//        return "redirect:{id}";
-        return "home";
+      return "redirect:{id}";
+//        return "home";
     }
 
     @ModelAttribute("userViewModel")

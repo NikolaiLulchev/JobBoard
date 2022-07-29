@@ -6,6 +6,7 @@ import org.softuni.jobboard.model.dto.UserUpdateDTO;
 import org.softuni.jobboard.model.entity.TechStackEntity;
 import org.softuni.jobboard.model.entity.UserEntity;
 import org.softuni.jobboard.model.entity.UserRoleEntity;
+import org.softuni.jobboard.model.enums.LevelEnum;
 import org.softuni.jobboard.model.enums.TechStackEnum;
 import org.softuni.jobboard.model.enums.UserRoleEnum;
 import org.softuni.jobboard.model.mapper.UserMapper;
@@ -21,11 +22,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -88,17 +86,29 @@ public class UserService {
         return new ArrayList<>(userRepository.findAll());
     }
 
-    @Transactional
+    //    @Transactional
     public void updateUser(UserEntity user, UserUpdateDTO userUpdateDTO) {
-        modelMapper.map(userUpdateDTO, UserEntity.class);
-//        user.setFirstName(userUpdateDTO.getFirstName())
-//                .setLastName(userUpdateDTO.getLastName())
-//                .setEmail(userUpdateDTO.getEmail())
-//                .setAge(userUpdateDTO.getAge())
-//                .setGender(userUpdateDTO.getGender())
-//                .setRole(Set.of())
-//                .setLevel(LevelEnum.valueOf(userUpdateDTO.getLevel()))
-//                .setTechStack(userUpdateDTO.getTechStack().stream().map(s -> new TechStackEntity(TechStackEnum.valueOf(s))).collect(Collectors.toList()));
+//        modelMapper.map(userUpdateDTO, UserEntity.class);
+        Set<UserRoleEntity> userRoleEntitySet = new HashSet<>();
+        for (String role : userUpdateDTO.getRole()) {
+            UserRoleEntity userRoleEntity = userRoleRepository.findFirstByRole(UserRoleEnum.valueOf(role));
+            userRoleEntitySet.add(userRoleEntity.setRole(UserRoleEnum.valueOf(role)));
+        }
+        List<TechStackEntity> userTechStackList = new ArrayList<>();
+        for (String stack : userUpdateDTO.getTechStack()) {
+            TechStackEntity techStackEntity = techStackRepository.findByTechStack(TechStackEnum.valueOf(stack));
+            userTechStackList.add(techStackEntity.setTechStack(TechStackEnum.valueOf(stack)));
+        }
+
+
+        user.setFirstName(userUpdateDTO.getFirstName())
+                .setLastName(userUpdateDTO.getLastName())
+                .setEmail(userUpdateDTO.getEmail())
+                .setAge(userUpdateDTO.getAge())
+                .setGender(userUpdateDTO.getGender())
+                .setRole(userRoleEntitySet)
+                .setLevel(LevelEnum.valueOf(userUpdateDTO.getLevel()))
+                .setTechStack(userTechStackList);
         userRepository.save(user);
     }
 
