@@ -1,8 +1,7 @@
 package org.softuni.jobboard.model.view;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class UserViewModel {
@@ -12,9 +11,9 @@ public class UserViewModel {
     private String email;
     private Integer age;
     private String gender;
-    private Set<String> role = new HashSet<>();
+    private Set<String> role;
     private String level;
-    private List<String> techStack = new ArrayList<>();
+    private List<String> techStack;
 
     public UserViewModel() {
     }
@@ -102,5 +101,33 @@ public class UserViewModel {
     public UserViewModel setTechStack(List<String> techStack) {
         this.techStack = techStack;
         return this;
+    }
+
+    public String getFullName() {
+        StringBuilder fullName = new StringBuilder();
+        if (getFirstName() != null) {
+            fullName.append(getFirstName());
+        }
+        if (getLastName() != null) {
+            if (!fullName.isEmpty()) {
+                fullName.append(" ");
+            }
+            fullName.append(getLastName());
+        }
+
+        return fullName.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserViewModel)) return false;
+        UserViewModel that = (UserViewModel) o;
+        return Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getRole(), that.getRole());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEmail(), getRole());
     }
 }

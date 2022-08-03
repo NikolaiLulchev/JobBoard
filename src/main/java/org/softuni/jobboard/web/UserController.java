@@ -6,12 +6,14 @@ import org.softuni.jobboard.model.entity.UserEntity;
 import org.softuni.jobboard.model.mapper.UserMapper;
 import org.softuni.jobboard.model.view.UserViewModel;
 import org.softuni.jobboard.repository.UserRepository;
+import org.softuni.jobboard.service.TechStackService;
 import org.softuni.jobboard.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/users")
@@ -21,12 +23,14 @@ public class UserController {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final ModelMapper modelMapper;
+    private final TechStackService techStackService;
 
-    public UserController(UserService userService, UserRepository userRepository, UserMapper userMapper, ModelMapper modelMapper) {
+    public UserController(UserService userService, UserRepository userRepository, UserMapper userMapper, ModelMapper modelMapper, TechStackService techStackService) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.modelMapper = modelMapper;
+        this.techStackService = techStackService;
     }
 
     @GetMapping("/login")
@@ -39,6 +43,7 @@ public class UserController {
         String username = principal.getName();
         UserEntity user = userService.getUser(username);
         UserViewModel userViewModel = modelMapper.map(user, UserViewModel.class);
+        userViewModel.setRole(user.getRole().stream().map(r -> r.getRole().name()).collect(Collectors.toSet()));
 //        UserViewModel userViewModel = new UserViewModel(
 //                user.getFirstName(),
 //                user.getLastName(),

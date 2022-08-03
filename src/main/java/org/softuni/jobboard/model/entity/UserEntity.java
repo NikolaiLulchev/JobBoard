@@ -4,10 +4,7 @@ import org.softuni.jobboard.model.enums.GenderEnum;
 import org.softuni.jobboard.model.enums.LevelEnum;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -137,5 +134,17 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserEntity)) return false;
+        if (!super.equals(o)) return false;
+        UserEntity user = (UserEntity) o;
+        return Objects.equals(getUsername(), user.getUsername()) && Objects.equals(getRole(), user.getRole());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getUsername(), getRole());
+    }
 }

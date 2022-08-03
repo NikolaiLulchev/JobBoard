@@ -42,8 +42,8 @@
                     </form>
                 </div>
             </li>
-            <div class="nav-link">Welcome,
-                <th:block th:text="${#authentication.principal.fullName}">X</th:block>
+            <div th:object="${userViewModel}" class="nav-link">Welcome,
+                <th:block th:text="*{fullName}">X</th:block>
                 !
             </div>
         </th:block>
