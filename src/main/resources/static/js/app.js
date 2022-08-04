@@ -1,9 +1,8 @@
 let elementById = document.getElementById('loadUsers')
-
 elementById.addEventListener('click', onLoadUsers)
 
 function onLoadUsers (event) {
-  var requestOptions = {
+  const requestOptions = {
     method: 'GET',
     redirect: 'follow',
   }
@@ -25,6 +24,7 @@ function onLoadUsers (event) {
       usernameCol.textContent = user.username
       levelCol.textContent = user.level
       roleCol.textContent = user.role
+      actionCol.
 
       // add the columns to the parent row
       row.appendChild(usernameCol)

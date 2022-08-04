@@ -35,9 +35,6 @@ spring:
   #cloud-name: 
 logging:
   level:
-    root: "warn"
-#    org.springframework: "debug"
-    #    org.springframework.context: "debug"
-#    org.hibernate: "debug"
-#    org.hibernate.SQL: "debug"
-#    org.hibernate.type.descriptor: "trace"
+    org.springframework: "debug"
+    org.hibernate.SQL: "debug"
+    org.hibernate.type.descriptor.sql.BasicBinder: "trace"
