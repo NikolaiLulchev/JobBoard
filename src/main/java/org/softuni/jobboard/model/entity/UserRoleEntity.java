@@ -45,4 +45,9 @@ public class UserRoleEntity extends BaseEntity {
     public int hashCode() {
         return Objects.hash(super.hashCode(), getRole());
     }
+
+    @Override
+    public String toString() {
+        return role.name();
+    }
 }
