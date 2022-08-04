@@ -36,6 +36,12 @@ Register as IT or Company.
             <input th:field="*{confirmPassword}" type="password" class="form-control" name="confirm_password"
                    placeholder="Confirm Password"
                    required="required">
+            <div class="form-control">
+                <input type="radio" id="USER" value="USER" th:name="role">
+                <label for="USER">I'm looking for job.</label>
+                <input type="radio" id="EMPLOYER" value="EMPLOYER" th:name="role">
+                <label for="EMPLOYER">I'm offering a job.</label>
+            </div>
 
             <button type="submit" class="w-100 btn btn-lg btn-primary">Register Now</button>
         </div>

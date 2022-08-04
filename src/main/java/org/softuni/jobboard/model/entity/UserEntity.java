@@ -25,7 +25,7 @@ public class UserEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<UserRoleEntity> role = new HashSet<>();
 
     @Enumerated(EnumType.STRING)

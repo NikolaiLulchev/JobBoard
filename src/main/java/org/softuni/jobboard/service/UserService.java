@@ -50,7 +50,10 @@ public class UserService {
 
     public void registerAndLogin(UserRegisterDTO userRegisterDTO) {
 
-        UserEntity newUser = userMapper.userDtoToUserEntity(userRegisterDTO);
+//        UserEntity newUser = userMapper.userDtoToUserEntity(userRegisterDTO);
+        UserRoleEntity userRole = userRoleRepository.findFirstByRole(UserRoleEnum.valueOf(userRegisterDTO.getRole()));
+        UserEntity newUser = modelMapper.map(userRegisterDTO,UserEntity.class);
+        newUser.setRole(Set.of(userRole));
         newUser.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
         this.userRepository.save(newUser);

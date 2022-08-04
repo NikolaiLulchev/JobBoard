@@ -36,7 +36,7 @@ spring:
 logging:
   level:
     root: "warn"
-    org.springframework: "debug"
+#    org.springframework: "debug"
     #    org.springframework.context: "debug"
 #    org.hibernate: "debug"
 #    org.hibernate.SQL: "debug"

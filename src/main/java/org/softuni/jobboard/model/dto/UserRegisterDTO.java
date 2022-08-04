@@ -15,6 +15,7 @@ public class UserRegisterDTO {
     private String lastName;
     private String password;
     private String confirmPassword;
+    private String role;
 
     @UniqueUsername(message = "Username occupied!")
     private String username;
@@ -73,6 +74,15 @@ public class UserRegisterDTO {
 
     public UserRegisterDTO setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+        return this;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public UserRegisterDTO setRole(String role) {
+        this.role = role;
         return this;
     }
 }
