@@ -41,7 +41,7 @@ public class UserController {
     @GetMapping("/profile/{id}")
     public String loadProfile(@PathVariable Long id, Principal principal, Model model) {
         String username = principal.getName();
-        UserEntity user = userService.getUser(username);
+        UserEntity user = userService.getUserById(id);
         UserViewModel userViewModel = modelMapper.map(user, UserViewModel.class);
         userViewModel.setRole(user.getRole().stream().map(r -> r.getRole().name()).collect(Collectors.toSet()));
 //        UserViewModel userViewModel = new UserViewModel(
@@ -64,7 +64,7 @@ public class UserController {
     public String Profile(@PathVariable Long id, UserUpdateDTO userUpdateDTO) {
         UserEntity user = userService.getUserById(id);
         userService.updateUser(user, userUpdateDTO);
-      return "redirect:{id}";
+      return "redirect:/users/profile/{id}";
 //        return "home";
     }
 

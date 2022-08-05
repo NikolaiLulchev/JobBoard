@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class UserViewModel {
 
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -18,9 +19,10 @@ public class UserViewModel {
     public UserViewModel() {
     }
 
-    public UserViewModel(String firstName, String lastName, String email,
+    public UserViewModel(Long id, String firstName, String lastName, String email,
                          Integer age, String gender, Set<String> role,
                          String level, List<String> techStack) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -29,6 +31,15 @@ public class UserViewModel {
         this.role = role;
         this.level = level;
         this.techStack = techStack;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public UserViewModel setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getFirstName() {

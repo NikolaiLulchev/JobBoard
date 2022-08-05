@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class TechStackService {
 
-    private TechStackRepository techStackRepository;
+    private final TechStackRepository techStackRepository;
 
     public TechStackService(TechStackRepository techStackRepository) {
         this.techStackRepository = techStackRepository;

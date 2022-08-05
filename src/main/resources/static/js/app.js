@@ -21,10 +21,14 @@ function onLoadUsers (event) {
       let roleCol = document.createElement('td')
       let actionCol = document.createElement('td')
 
+      let link = document.createElement('a')
+
       usernameCol.textContent = user.username
       levelCol.textContent = user.level
       roleCol.textContent = user.role
-      actionCol.
+      link.setAttribute('href', `/users/profile/${user.id}`)
+      link.textContent = 'View Profile'
+      actionCol.appendChild(link)
 
       // add the columns to the parent row
       row.appendChild(usernameCol)

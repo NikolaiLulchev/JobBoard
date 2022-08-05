@@ -118,6 +118,7 @@ public class UserService {
     private UserViewModel map(UserEntity user) {
 
         return new UserViewModel(
+                user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),

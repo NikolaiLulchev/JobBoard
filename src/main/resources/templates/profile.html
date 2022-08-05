@@ -7,7 +7,7 @@
 
 
 <div class="profile-card p-3 py-4" th:object="${userViewModel}">
-    <form th:action="@{/users/profile/{id}(id=${#authentication.principal.id})}"
+    <form th:action="@{/users/profile/{id}(id=*{id})}"
           th:method="patch">
         <div class="text-center mt-3">
             <div class="container rounded bg-white mt-5 mb-5">
@@ -102,7 +102,7 @@
                                             th:value="${l}"
                                             th:text="${l}"
                                             th:selected="${l.name()} == *{level}"
-                                            required="required">Select level
+                                    >Select level
                                     </option>
                                 </select>
                             </div>
