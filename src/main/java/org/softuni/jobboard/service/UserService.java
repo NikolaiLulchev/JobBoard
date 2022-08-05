@@ -6,11 +6,10 @@ import org.softuni.jobboard.model.dto.UserUpdateDTO;
 import org.softuni.jobboard.model.entity.TechStackEntity;
 import org.softuni.jobboard.model.entity.UserEntity;
 import org.softuni.jobboard.model.entity.UserRoleEntity;
+import org.softuni.jobboard.model.enums.GenderEnum;
 import org.softuni.jobboard.model.enums.LevelEnum;
 import org.softuni.jobboard.model.enums.TechStackEnum;
 import org.softuni.jobboard.model.enums.UserRoleEnum;
-import org.softuni.jobboard.model.mapper.UserMapper;
-import org.softuni.jobboard.model.view.UserViewModel;
 import org.softuni.jobboard.repository.TechStackRepository;
 import org.softuni.jobboard.repository.UserRepository;
 import org.softuni.jobboard.repository.UserRoleRepository;
@@ -24,7 +23,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -33,16 +31,16 @@ public class UserService {
     private final UserRoleRepository userRoleRepository;
     private final TechStackRepository techStackRepository;
     private final PasswordEncoder passwordEncoder;
-    private final UserMapper userMapper;
     private final UserDetailsService userDetailsService;
     private final ModelMapper modelMapper;
 
-    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository, TechStackRepository techStackRepository, PasswordEncoder passwordEncoder, UserMapper userMapper, UserDetailsService userDetailsService, ModelMapper modelMapper) {
+    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository,
+                       TechStackRepository techStackRepository, PasswordEncoder passwordEncoder,
+                       UserDetailsService userDetailsService, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.techStackRepository = techStackRepository;
         this.passwordEncoder = passwordEncoder;
-        this.userMapper = userMapper;
         this.userDetailsService = userDetailsService;
         this.modelMapper = modelMapper;
     }
@@ -50,9 +48,8 @@ public class UserService {
 
     public void registerAndLogin(UserRegisterDTO userRegisterDTO) {
 
-//        UserEntity newUser = userMapper.userDtoToUserEntity(userRegisterDTO);
         UserRoleEntity userRole = userRoleRepository.findFirstByRole(UserRoleEnum.valueOf(userRegisterDTO.getRole()));
-        UserEntity newUser = modelMapper.map(userRegisterDTO,UserEntity.class);
+        UserEntity newUser = modelMapper.map(userRegisterDTO, UserEntity.class);
         newUser.setRole(Set.of(userRole));
         newUser.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
@@ -89,9 +86,8 @@ public class UserService {
         return new ArrayList<>(userRepository.findAll());
     }
 
-    //    @Transactional
     public void updateUser(UserEntity user, UserUpdateDTO userUpdateDTO) {
-//        modelMapper.map(userUpdateDTO, UserEntity.class);
+
         Set<UserRoleEntity> userRoleEntitySet = new HashSet<>();
         for (String role : userUpdateDTO.getRole()) {
             UserRoleEntity userRoleEntity = userRoleRepository.findFirstByRole(UserRoleEnum.valueOf(role));
@@ -102,7 +98,6 @@ public class UserService {
             TechStackEntity techStackEntity = techStackRepository.findByTechStack(TechStackEnum.valueOf(stack));
             userTechStackList.add(techStackEntity.setTechStack(TechStackEnum.valueOf(stack)));
         }
-
 
         user.setFirstName(userUpdateDTO.getFirstName())
                 .setLastName(userUpdateDTO.getLastName())
@@ -115,20 +110,20 @@ public class UserService {
         userRepository.save(user);
     }
 
-    private UserViewModel map(UserEntity user) {
-
-        return new UserViewModel(
-                user.getId(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getAge(),
-                user.getGender().name(),
-                user.getRole().stream().map(e -> e.getRole().name()).collect(Collectors.toSet()),
-                user.getLevel().name(),
-                user.getTechStack().stream().map(ts -> ts.getTechStack().name()).collect(Collectors.toList())
-        );
-    }
+//    private UserViewModel map(UserEntity user) {
+//
+//        return new UserViewModel(
+//                user.getId(),
+//                user.getFirstName(),
+//                user.getLastName(),
+//                user.getEmail(),
+//                user.getAge(),
+//                user.getGender().name(),
+//                user.getRole().stream().map(e -> e.getRole().name()).collect(Collectors.toSet()),
+//                user.getLevel().name(),
+//                user.getTechStack().stream().map(ts -> ts.getTechStack().name()).collect(Collectors.toList())
+//        );
+//    }
 
     public void initializeRoles() {
         if (userRoleRepository.count() == 0) {
@@ -140,13 +135,21 @@ public class UserService {
         }
     }
 
-    public void initializeTechStack() {
-        if (techStackRepository.count() == 0) {
-            Arrays.stream(TechStackEnum.values()).map(t -> {
-                TechStackEntity techStack = new TechStackEntity();
-                techStack.setTechStack(t);
-                return techStack;
-            }).forEach(techStackRepository::save);
+    public void initializeAdminUser() {
+        Optional<UserEntity> optAdmin = userRepository.findByUsername("admin");
+        if (optAdmin.isPresent()) {
+            return;
         }
+        UserEntity admin = new UserEntity();
+        UserRoleEntity adminRole = userRoleRepository.findFirstByRole(UserRoleEnum.valueOf("ADMIN"));
+        admin.setUsername("admin")
+                .setPassword(passwordEncoder.encode("1234"))
+                .setFirstName("Admin")
+                .setLastName("Adminov")
+                .setEmail("admin@jobboard.com")
+                .setAge(41)
+                .setGender(GenderEnum.MALE)
+                .setRole(Set.of(adminRole));
+        userRepository.save(admin);
     }
 }

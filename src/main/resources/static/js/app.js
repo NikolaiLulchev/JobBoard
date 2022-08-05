@@ -1,5 +1,5 @@
-let elementById = document.getElementById('loadUsers')
-elementById.addEventListener('click', onLoadUsers)
+let loadUsersBtn = document.getElementById('loadUsers')
+loadUsersBtn.addEventListener('click', onLoadUsers)
 
 function onLoadUsers (event) {
   const requestOptions = {
@@ -21,14 +21,16 @@ function onLoadUsers (event) {
       let roleCol = document.createElement('td')
       let actionCol = document.createElement('td')
 
-      let link = document.createElement('a')
+      let profileLink = document.createElement('a')
+
+      profileLink.setAttribute('href', `/users/profile/${user.id}`)
+      profileLink.textContent = 'View Profile'
+      profileLink.className = 'btn btn-primary'
 
       usernameCol.textContent = user.username
       levelCol.textContent = user.level
       roleCol.textContent = user.role
-      link.setAttribute('href', `/users/profile/${user.id}`)
-      link.textContent = 'View Profile'
-      actionCol.appendChild(link)
+      actionCol.appendChild(profileLink)
 
       // add the columns to the parent row
       row.appendChild(usernameCol)

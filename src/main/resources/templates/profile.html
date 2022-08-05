@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="fragments/commons::head"></head>
 <body>
@@ -27,14 +29,14 @@
                                 <h4 class="text-right">Profile Settings</h4>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-6"><label class="labels">Name</label>
+                                <div class="col-md-6"><label class="labels">First Name</label>
                                     <input type="text"
                                            name="firstName"
                                            class="form-control"
                                            placeholder="first name"
                                            th:value="*{firstName}">
                                 </div>
-                                <div class="col-md-6"><label class="labels">Surname</label>
+                                <div class="col-md-6"><label class="labels">Last Name</label>
                                     <input type="text"
                                            name="lastName"
                                            class="form-control"
@@ -72,7 +74,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div sec:authorize="hasRole('ADMIN')" class="col-md-12">
                                     <label for="role" class="labels">User Role</label>
                                     <br>
                                     <input type="checkbox" name="role" id="role"

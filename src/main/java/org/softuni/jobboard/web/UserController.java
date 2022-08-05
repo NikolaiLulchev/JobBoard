@@ -3,9 +3,7 @@ package org.softuni.jobboard.web;
 import org.modelmapper.ModelMapper;
 import org.softuni.jobboard.model.dto.UserUpdateDTO;
 import org.softuni.jobboard.model.entity.UserEntity;
-import org.softuni.jobboard.model.mapper.UserMapper;
 import org.softuni.jobboard.model.view.UserViewModel;
-import org.softuni.jobboard.repository.UserRepository;
 import org.softuni.jobboard.service.TechStackService;
 import org.softuni.jobboard.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -20,15 +18,11 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService userService;
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
     private final ModelMapper modelMapper;
     private final TechStackService techStackService;
 
-    public UserController(UserService userService, UserRepository userRepository, UserMapper userMapper, ModelMapper modelMapper, TechStackService techStackService) {
+    public UserController(UserService userService, ModelMapper modelMapper, TechStackService techStackService) {
         this.userService = userService;
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
         this.modelMapper = modelMapper;
         this.techStackService = techStackService;
     }
@@ -40,7 +34,7 @@ public class UserController {
 
     @GetMapping("/profile/{id}")
     public String loadProfile(@PathVariable Long id, Principal principal, Model model) {
-        String username = principal.getName();
+//        String username = principal.getName();
         UserEntity user = userService.getUserById(id);
         UserViewModel userViewModel = modelMapper.map(user, UserViewModel.class);
         userViewModel.setRole(user.getRole().stream().map(r -> r.getRole().name()).collect(Collectors.toSet()));
