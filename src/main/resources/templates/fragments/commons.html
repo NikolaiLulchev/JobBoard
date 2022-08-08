@@ -20,7 +20,7 @@
 <body>
 
 <header th:fragment="navigation">
-    <nav class="nav nav-item">
+    <nav class="nav nav-item mt-3">
         <a class="nav-link" href="/home">Home</a>
         <th:block sec:authorize="!isAuthenticated()">
             <a class="nav-link" href="/users/login">Log in</a>
@@ -30,7 +30,7 @@
         </th:block>
         <th:block sec:authorize="isAuthenticated()">
             <a class="nav-link" href="/offers">Offers</a>
-            <a sec:authorize="hasRole('EMPLOYER')" class="nav-link" href="/add-offer">Add Offer</a>
+            <a sec:authorize="hasAnyRole('EMPLOYER', 'ADMIN')" class="nav-link" href="/offers/add">Add Offer</a>
             <a sec:authorize="hasRole('ADMIN')" class="nav-link" href="/admin-panel">Admin panel</a>
             <a class="nav-link" th:href="@{/users/profile/{id}(id=${#authentication.principal.id})}">Profile</a>
             <a class="nav-link" href="/about">About Us</a>

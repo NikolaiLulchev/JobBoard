@@ -16,15 +16,7 @@ public class WebController {
         return "home";
     }
 
-    @GetMapping("/offers")
-    public String offers() {
-        return "offers";
-    }
 
-    @GetMapping("/add-offer")
-    public String addOffer() {
-        return "add-offer";
-    }
 
 
 }
