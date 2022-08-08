@@ -89,9 +89,13 @@ public class UserService {
     public void updateUser(UserEntity user, UserUpdateDTO userUpdateDTO) {
 
         Set<UserRoleEntity> userRoleEntitySet = new HashSet<>();
-        for (String role : userUpdateDTO.getRole()) {
-            UserRoleEntity userRoleEntity = userRoleRepository.findFirstByRole(UserRoleEnum.valueOf(role));
-            userRoleEntitySet.add(userRoleEntity.setRole(UserRoleEnum.valueOf(role)));
+        if(userUpdateDTO.getRole() == null){
+            userRoleEntitySet = user.getRole();
+        }else {
+            for (String role : userUpdateDTO.getRole()) {
+                UserRoleEntity userRoleEntity = userRoleRepository.findFirstByRole(UserRoleEnum.valueOf(role));
+                userRoleEntitySet.add(userRoleEntity.setRole(UserRoleEnum.valueOf(role)));
+            }
         }
         List<TechStackEntity> userTechStackList = new ArrayList<>();
         for (String stack : userUpdateDTO.getTechStack()) {
