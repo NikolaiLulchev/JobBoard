@@ -112,11 +112,13 @@
                             <div class="col-md-12">
                                 <label for="tech-stack" class="labels">Tech Stack</label>
                                 <br>
-                                <input type="checkbox" name="techStack" id="tech-stack"
-                                       th:each="ts : ${T(org.softuni.jobboard.model.enums.TechStackEnum).values()}"
-                                       th:text="${ts}"
-                                       th:value="${ts}"
-                                       th:field="*{techStack}"/>
+                                <th:block th:each="ts : ${T(org.softuni.jobboard.model.enums.TechStackEnum).values()}">
+                                    <input type="checkbox" name="techStack" id="tech-stack"
+                                           th:value="${ts}"
+                                           th:field="*{techStack}"/>
+                                    <label th:text="${ts}"></label>
+                                    <br/>
+                                </th:block>
                             </div>
                         </div>
                     </div>

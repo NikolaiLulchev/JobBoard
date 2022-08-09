@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>
 
 <head th:replace="fragments/commons::head"></head>
 <body>
@@ -26,34 +26,30 @@
                     <div class="col-md-5 border-right">
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-right">Profile Settings</h4>
+                                <h4 class="text-right">Offer Details</h4>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-6"><label class="labels">Title</label>
-                                    <input type="text"
-                                           name="title"
-                                           class="form-control"
-                                           placeholder="offer title"
-                                           th:value="*{title}"
-                                           required="required">
-                                </div>
+                                <label class="labels">Title</label>
+                                <input type="text"
+                                       name="title"
+                                       class="form-control"
+                                       placeholder="offer title"
+                                       th:value="*{title}"
+                                       required="required">
                             </div>
                             <div class="row mt-3">
-
-                                <div class="row mt-3">
-                                    <div class="col-md-6"><label class="labels">Description</label>
-                                        <input type="text"
-                                               name="description"
-                                               class="form-control"
-                                               placeholder="offer description"
-                                               th:value="*{description}"
-                                               required="required">
-                                    </div>
-                                </div>
+                                <label class="labels">Description</label>
+                                <textarea rows="9"
+                                          name="description"
+                                          class="form-control"
+                                          placeholder="offer description"
+                                          th:value="*{description}"
+                                          required="required"></textarea>
                             </div>
                             <div class="mt-5 text-center">
-                                <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                                <button class="btn btn-primary profile-button" type="submit">Post Offer</button>
                             </div>
+
                         </div>
                     </div>
 
@@ -71,7 +67,7 @@
                                             th:value="${l}"
                                             th:text="${l}"
                                             th:selected="${l.name()} == *{level}"
-                                            >Select level
+                                    >Select level
                                     </option>
                                 </select>
                             </div>
@@ -79,11 +75,13 @@
                             <div class="col-md-12">
                                 <label for="tech-stack" class="labels">Tech Stack</label>
                                 <br>
-                                <input type="checkbox" name="techStack" id="tech-stack"
-                                       th:each="ts : ${T(org.softuni.jobboard.model.enums.TechStackEnum).values()}"
-                                       th:text="${ts}"
-                                       th:value="${ts}"
-                                       th:field="*{techStack}">
+                                <th:block th:each="ts : ${T(org.softuni.jobboard.model.enums.TechStackEnum).values()}">
+                                    <input type="checkbox" name="techStack" id="tech-stack"
+                                           th:value="${ts}"
+                                           th:field="*{techStack}"/>
+                                    <label th:text="${ts}"></label>
+                                    <br/>
+                                </th:block>
                             </div>
                         </div>
                     </div>
