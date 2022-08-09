@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tech_stack")
-public class TechStackEntity extends BaseEntity{
+public class TechStackEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private TechStackEnum techStack;
@@ -43,6 +43,6 @@ public class TechStackEntity extends BaseEntity{
 
     @Override
     public String toString() {
-        return this.techStack.name();
+        return this.techStack == null ? "" : this.techStack.name();
     }
 }
