@@ -89,15 +89,7 @@ public class UserService {
 
     public void updateUser(UserEntity user, UserUpdateDTO userUpdateDTO) {
 
-        Set<UserRoleEntity> userRoleEntitySet = new HashSet<>();
-        if(userUpdateDTO.getRole() == null){
-            userRoleEntitySet = user.getRole();
-        }else {
-            for (String role : userUpdateDTO.getRole()) {
-                UserRoleEntity userRoleEntity = userRoleRepository.findFirstByRole(UserRoleEnum.valueOf(role));
-                userRoleEntitySet.add(userRoleEntity.setRole(UserRoleEnum.valueOf(role)));
-            }
-        }
+        Set<UserRoleEntity> userRoleEntitySet = getUserRoleEntitySet(user, userUpdateDTO);
         List<TechStackEntity> userTechStackList = getTechStackEntityList(userUpdateDTO.getTechStack());
 
         user.setFirstName(userUpdateDTO.getFirstName())
@@ -109,6 +101,19 @@ public class UserService {
                 .setLevel(LevelEnum.valueOf(userUpdateDTO.getLevel()))
                 .setTechStack(userTechStackList);
         userRepository.save(user);
+    }
+
+    private Set<UserRoleEntity> getUserRoleEntitySet(UserEntity user, UserUpdateDTO userUpdateDTO) {
+        Set<UserRoleEntity> userRoleEntitySet = new HashSet<>();
+        if(userUpdateDTO.getRole() == null){
+            userRoleEntitySet = user.getRole();
+        }else {
+            for (String role : userUpdateDTO.getRole()) {
+                UserRoleEntity userRoleEntity = userRoleRepository.findFirstByRole(UserRoleEnum.valueOf(role));
+                userRoleEntitySet.add(userRoleEntity.setRole(UserRoleEnum.valueOf(role)));
+            }
+        }
+        return userRoleEntitySet;
     }
 
     @NotNull

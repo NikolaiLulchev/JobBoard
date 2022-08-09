@@ -2,6 +2,7 @@ package org.softuni.jobboard.model.dto;
 
 import org.softuni.jobboard.model.enums.GenderEnum;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 
@@ -10,13 +11,21 @@ public class UserUpdateDTO {
     private Long id;
     private String username;
     private String password;
+    @NotNull
     private String email;
+    @NotNull
     private Integer age;
+    @NotNull
     private GenderEnum gender;
+
     private Set<String> role;
+    @NotNull
     private String level;
+    @NotNull
     private List<String> techStack;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
 
     public UserUpdateDTO() {

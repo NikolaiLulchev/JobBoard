@@ -8,8 +8,11 @@ import org.softuni.jobboard.service.TechStackService;
 import org.softuni.jobboard.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.stream.Collectors;
 
@@ -55,11 +58,19 @@ public class UserController {
     }
 
     @PatchMapping("/profile/{id}")
-    public String Profile(@PathVariable Long id, UserUpdateDTO userUpdateDTO) {
+    public String Profile(@PathVariable Long id, @Valid UserUpdateDTO userUpdateDTO, BindingResult bindingResult,
+                          RedirectAttributes redirectAttributes) {
         UserEntity user = userService.getUserById(id);
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userViewModel", userUpdateDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel",
+                    bindingResult);
+            return "redirect:/users/profile/{id}";
+        }
+
         userService.updateUser(user, userUpdateDTO);
-      return "redirect:/users/profile/{id}";
-//        return "home";
+        return "redirect:/users/profile/{id}";
     }
 
     @ModelAttribute("userViewModel")
