@@ -4,10 +4,12 @@ import org.softuni.jobboard.model.entity.UserEntity;
 import org.softuni.jobboard.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -24,16 +26,16 @@ public class UserRestController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<UserEntity> getUserById(@PathVariable("id") Long userId) {
-//        Optional<UserEntity> userOpt = Optional.ofNullable(userService.getUserById(userId));
-//        if (userOpt.isEmpty()) {
-//            return ResponseEntity.
-//                    notFound().
-//                    build();
-//        } else {
-//            return ResponseEntity.
-//                    ok(userOpt.get());
-//        }
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<UserEntity> getUserById(@PathVariable("id") Long userId) {
+        Optional<UserEntity> userOpt = Optional.ofNullable(userService.getUserById(userId));
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.
+                    notFound().
+                    build();
+        } else {
+            return ResponseEntity.
+                    ok(userOpt.get());
+        }
+    }
 }

@@ -23,13 +23,23 @@ function onLoadUsers (event) {
 
       let profileLink = document.createElement('a')
 
+      // let roleArr = user.role
+      // roleArr.forEach((roleObj, i) => {
+      //   for (let key in roleObj) {
+      //
+      //     console.log(`${roleObj["role"]}`)
+      //   }
+      // })
+
       profileLink.setAttribute('href', `/users/profile/${user.id}`)
       profileLink.textContent = 'View Profile'
       profileLink.className = 'btn btn-primary'
 
+      let roleArr = user.role.map(roleObj => roleObj['role'])
+
       usernameCol.textContent = user.username
       levelCol.textContent = user.level
-      roleCol.textContent = user.role
+      roleCol.textContent = roleArr
       actionCol.appendChild(profileLink)
 
       // add the columns to the parent row
