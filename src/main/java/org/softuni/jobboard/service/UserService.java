@@ -1,5 +1,6 @@
 package org.softuni.jobboard.service;
 
+import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
 import org.softuni.jobboard.model.dto.UserRegisterDTO;
 import org.softuni.jobboard.model.dto.UserUpdateDTO;
@@ -97,11 +98,7 @@ public class UserService {
                 userRoleEntitySet.add(userRoleEntity.setRole(UserRoleEnum.valueOf(role)));
             }
         }
-        List<TechStackEntity> userTechStackList = new ArrayList<>();
-        for (String stack : userUpdateDTO.getTechStack()) {
-            TechStackEntity techStackEntity = techStackRepository.findByTechStack(TechStackEnum.valueOf(stack));
-            userTechStackList.add(techStackEntity.setTechStack(TechStackEnum.valueOf(stack)));
-        }
+        List<TechStackEntity> userTechStackList = getTechStackEntityList(userUpdateDTO.getTechStack());
 
         user.setFirstName(userUpdateDTO.getFirstName())
                 .setLastName(userUpdateDTO.getLastName())
@@ -114,20 +111,15 @@ public class UserService {
         userRepository.save(user);
     }
 
-//    private UserViewModel map(UserEntity user) {
-//
-//        return new UserViewModel(
-//                user.getId(),
-//                user.getFirstName(),
-//                user.getLastName(),
-//                user.getEmail(),
-//                user.getAge(),
-//                user.getGender().name(),
-//                user.getRole().stream().map(e -> e.getRole().name()).collect(Collectors.toSet()),
-//                user.getLevel().name(),
-//                user.getTechStack().stream().map(ts -> ts.getTechStack().name()).collect(Collectors.toList())
-//        );
-//    }
+    @NotNull
+    public List<TechStackEntity> getTechStackEntityList(List<String> techStackList) {
+        List<TechStackEntity> userTechStackList = new ArrayList<>();
+        for (String stack : techStackList) {
+            TechStackEntity techStackEntity = techStackRepository.findByTechStack(TechStackEnum.valueOf(stack));
+            userTechStackList.add(techStackEntity.setTechStack(TechStackEnum.valueOf(stack)));
+        }
+        return userTechStackList;
+    }
 
     public void initializeRoles() {
         if (userRoleRepository.count() == 0) {

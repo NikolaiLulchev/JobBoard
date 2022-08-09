@@ -28,6 +28,7 @@ public class OfferService {
     public void postOffer(Principal principal, OfferAddDTO offerModel) {
         UserEntity user = userService.getUser(principal.getName());
         OfferEntity offer = modelMapper.map(offerModel, OfferEntity.class);
+        offer.setTechStack(userService.getTechStackEntityList(offerModel.getTechStack()));
         offer.setUser(user);
         offer.setAddedOn(LocalDateTime.now());
         offerRepository.save(offer);
@@ -36,5 +37,9 @@ public class OfferService {
     public List<OfferViewModel> getAllOffers() {
         return offerRepository.findAllByOrderByAddedOnDesc().stream()
                 .map(offerEntity -> modelMapper.map(offerEntity, OfferViewModel.class)).collect(Collectors.toList());
+    }
+
+    public OfferEntity getOfferById(Long id) {
+        return offerRepository.getById(id);
     }
 }

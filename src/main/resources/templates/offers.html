@@ -12,7 +12,7 @@
             <div class="category mb-30">
                 <div class="job">
                     <span class="colors2 mb-4">Programming &amp; IT</span>
-                    <h5><a href="#" th:text="*{title}">Medical Assistant, East Valley Primary Care</a></h5>
+                    <h5><a th:href="@{/offers/details/{id}(id=*{id})}" th:text="*{title}">Medical Assistant, East Valley Primary Care</a></h5>
                     <ul class="place">
                         <li>
                             <p><i class="fas fa-map-marker-alt pe-2"></i> New York, USA</p>
