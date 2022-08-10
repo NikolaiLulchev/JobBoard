@@ -29,13 +29,14 @@
                                 <h4 class="text-right">Profile Settings</h4>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-6"><label class="labels">First Name</label>
+                                <div class="col-md-6"><label for="firstName" class="labels">First Name</label>
                                     <input type="text"
                                            name="firstName"
+                                           id="firstName"
                                            class="form-control"
                                            placeholder="first name"
-                                           th:value="*{firstName}"
-                                           th:errorclass="is-invalid">
+                                           th:field="*{firstName}"
+                                           th:errorclass="is-invalid"/>
                                     <p class="invalid-feedback errors alert alert-danger">
                                         First name is required and should be between 2 and 20 symbols.
                                     </p>
@@ -76,14 +77,12 @@
                                             First name is required and should be between 2 and 20 symbols.
                                         </p>
                                     </div>
-                                    <div class="col-md-6"><label class="labels">Gender</label>
-                                        <select class="form-control"
+                                    <div class="col-md-6">
+                                        <label class="labels">Gender</label>
+                                        <select th:field="*{gender}" class="form-control"
                                                 id="gender"
                                                 name="gender"
                                                 th:errorclass="is-invalid">
-                                            <p class="invalid-feedback errors alert alert-danger">
-                                                First name is required and should be between 2 and 20 symbols.
-                                            </p>>
                                             <option value="">--select gender--</option>
                                             <option th:each="g : ${T(org.softuni.jobboard.model.enums.GenderEnum).values()}"
                                                     th:value="${g}"
@@ -92,6 +91,9 @@
                                             >Select gender
                                             </option>
                                         </select>
+                                        <p class="invalid-feedback errors alert alert-danger">
+                                            Gender is required and should be MALE or FEMALE.
+                                        </p>
                                     </div>
                                 </div>
                                 <div sec:authorize="hasRole('ADMIN')" class="col-md-12">

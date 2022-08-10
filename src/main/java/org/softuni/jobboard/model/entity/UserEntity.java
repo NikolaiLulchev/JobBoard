@@ -4,7 +4,10 @@ import org.softuni.jobboard.model.enums.GenderEnum;
 import org.softuni.jobboard.model.enums.LevelEnum;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -16,7 +19,7 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column

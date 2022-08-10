@@ -9,7 +9,10 @@ import org.softuni.jobboard.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -58,23 +61,23 @@ public class UserController {
     }
 
     @PatchMapping("/profile/{id}")
-    public String Profile(@PathVariable Long id, @Valid UserUpdateDTO userUpdateDTO, BindingResult bindingResult,
-                          RedirectAttributes redirectAttributes) {
+    public String Profile(@Valid UserUpdateDTO userUpdateDTO, BindingResult bindingResult,
+                          RedirectAttributes redirectAttributes, @PathVariable Long id) {
         UserEntity user = userService.getUserById(id);
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userViewModel", userUpdateDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel",
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userViewModel",
                     bindingResult);
-            return "redirect:/users/profile/{id}";
+            return "redirect:{id}";
         }
 
         userService.updateUser(user, userUpdateDTO);
-        return "redirect:/users/profile/{id}";
+        return "redirect:/home";
     }
 
-    @ModelAttribute("userViewModel")
-    private UserViewModel userViewModel() {
-        return new UserViewModel();
-    }
+//    @ModelAttribute("userViewModel")
+//    private UserViewModel userViewModel() {
+//        return new UserViewModel();
+//    }
 }

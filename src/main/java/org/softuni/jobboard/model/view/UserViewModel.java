@@ -1,5 +1,6 @@
 package org.softuni.jobboard.model.view;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -7,13 +8,21 @@ import java.util.Set;
 public class UserViewModel {
 
     private Long id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private String email;
+    @NotNull
     private Integer age;
+    @NotNull
     private String gender;
+
     private Set<String> role;
+    @NotNull
     private String level;
+    @NotNull
     private List<String> techStack;
 
     public UserViewModel() {

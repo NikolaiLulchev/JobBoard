@@ -3,6 +3,11 @@ package org.softuni.jobboard.model.dto;
 import org.softuni.jobboard.model.validation.FieldMatch;
 import org.softuni.jobboard.model.validation.UniqueUsername;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @FieldMatch(
         first = "password",
         second = "confirmPassword",
@@ -10,14 +15,24 @@ import org.softuni.jobboard.model.validation.UniqueUsername;
 )
 public class UserRegisterDTO {
 
+    @Email
+    @NotEmpty
     private String email;
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String firstName;
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String lastName;
+    @NotEmpty
+    @Size(min = 4)
     private String password;
     private String confirmPassword;
+    @NotNull
     private String role;
-
     @UniqueUsername(message = "Username occupied!")
+    @NotEmpty
+    @Size(min = 4, max = 20)
     private String username;
 
     public UserRegisterDTO() {

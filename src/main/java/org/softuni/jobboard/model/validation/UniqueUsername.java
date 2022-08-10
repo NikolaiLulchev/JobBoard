@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = UniqueUsernameValidator.class)
 public @interface UniqueUsername {
 
-  String message() default "Invalid Email";
+  String message() default "Invalid Username";
 
   Class<?>[] groups() default {};
 
