@@ -29,52 +29,59 @@
                                 <h4 class="text-right">Profile Settings</h4>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-6"><label for="firstName" class="labels">First Name</label>
-                                    <input type="text"
-                                           name="firstName"
-                                           id="firstName"
-                                           class="form-control"
-                                           placeholder="first name"
-                                           th:field="*{firstName}"
-                                           th:errorclass="is-invalid"/>
+                                <div class="col-md-6">
+                                    <label for="firstName" class="labels">First Name</label>
+                                    <input
+                                            id="firstName"
+                                            th:field="*{firstName}"
+                                            th:errorclass="is-invalid"
+                                            type="text"
+                                            class="form-control"
+                                            name="first_name"
+                                            placeholder="First Name"/>
                                     <p class="invalid-feedback errors alert alert-danger">
                                         First name is required and should be between 2 and 20 symbols.
                                     </p>
                                 </div>
                                 <div class="col-md-6"><label class="labels">Last Name</label>
-                                    <input type="text"
-                                           name="lastName"
-                                           class="form-control"
-                                           th:value="*{lastName}"
-                                           placeholder="surname"
-                                           th:errorclass="is-invalid">
+                                    <input
+                                            id="lastName"
+                                            th:field="*{lastName}"
+                                            th:errorclass="is-invalid"
+                                            type="text"
+                                            class="form-control"
+                                            name="last_name"
+                                            placeholder="Last Name"/>
                                     <p class="invalid-feedback errors alert alert-danger">
-                                        First name is required and should be between 2 and 20 symbols.
+                                        Last name is required and should be between 2 and 20 symbols.
                                     </p>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-12"><label class="labels">Email</label>
-                                    <input type="text"
-                                           name="email"
-                                           class="form-control"
-                                           placeholder="enter email"
-                                           th:value="*{email}"
-                                           th:errorclass="is-invalid">
+                                    <input
+                                            id="email"
+                                            th:field="*{email}"
+                                            th:errorclass="is-invalid"
+                                            type="email"
+                                            class="form-control"
+                                            name="email"
+                                            placeholder="Email"/>
                                     <p class="invalid-feedback errors alert alert-danger">
-                                        First name is required and should be between 2 and 20 symbols.
+                                        Email is required and should be valid.
                                     </p>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-6"><label class="labels">Age</label>
-                                        <input type="number"
+                                        <input id="age"
+                                               th:field="*{age}"
+                                               th:errorclass="is-invalid"
+                                               type="number"
                                                name="age"
                                                class="form-control"
-                                               placeholder="enter age"
-                                               th:value="*{age}"
-                                               th:errorclass="is-invalid">
+                                               placeholder="enter age">
                                         <p class="invalid-feedback errors alert alert-danger">
-                                            First name is required and should be between 2 and 20 symbols.
+                                            You must be 18 or older.
                                         </p>
                                     </div>
                                     <div class="col-md-6">
@@ -141,7 +148,7 @@
                                     <input type="checkbox" name="techStack" id="tech-stack"
                                            th:value="${ts}"
                                            th:field="*{techStack}"
-                                    th:errorclass="is-invalid">
+                                           th:errorclass="is-invalid">
                                     <label th:text="${ts}"></label>
                                     <br/>
                                     <p class="invalid-feedback errors alert alert-danger">

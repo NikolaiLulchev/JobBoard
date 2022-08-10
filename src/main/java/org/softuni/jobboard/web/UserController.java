@@ -55,24 +55,27 @@ public class UserController {
 //                user.getTechStack().stream().map(ts -> ts.getTechStack().name()).collect(Collectors.toList())
 //        );
 
-        model.addAttribute("userViewModel", userViewModel);
+        if (!model.containsAttribute("userViewModel")) {
+            model.addAttribute("userViewModel", userViewModel);
+        }
+
 
         return "profile";
     }
 
     @PatchMapping("/profile/{id}")
-    public String Profile(@Valid UserUpdateDTO userUpdateDTO, BindingResult bindingResult,
+    public String Profile(@Valid UserUpdateDTO userViewModel, BindingResult bindingResult,
                           RedirectAttributes redirectAttributes, @PathVariable Long id) {
         UserEntity user = userService.getUserById(id);
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("userViewModel", userUpdateDTO);
+            redirectAttributes.addFlashAttribute("userViewModel", userViewModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userViewModel",
                     bindingResult);
             return "redirect:{id}";
         }
 
-        userService.updateUser(user, userUpdateDTO);
+        userService.updateUser(user, userViewModel);
         return "redirect:/home";
     }
 

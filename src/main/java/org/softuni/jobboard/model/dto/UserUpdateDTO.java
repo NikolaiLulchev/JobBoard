@@ -2,7 +2,7 @@ package org.softuni.jobboard.model.dto;
 
 import org.softuni.jobboard.model.enums.GenderEnum;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Set;
 
@@ -11,10 +11,14 @@ public class UserUpdateDTO {
     private Long id;
     private String username;
     private String password;
-    @NotNull
+    @Email
+    @NotEmpty
     private String email;
+
+    @Min(18)
     @NotNull
     private Integer age;
+
     @NotNull
     private GenderEnum gender;
 
@@ -23,9 +27,11 @@ public class UserUpdateDTO {
     private String level;
     @NotNull
     private List<String> techStack;
-    @NotNull
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String firstName;
-    @NotNull
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String lastName;
 
     public UserUpdateDTO() {
@@ -144,5 +150,20 @@ public class UserUpdateDTO {
     public UserUpdateDTO setLastName(String lastName) {
         this.lastName = lastName;
         return this;
+    }
+
+    public String getFullName() {
+        StringBuilder fullName = new StringBuilder();
+        if (getFirstName() != null) {
+            fullName.append(getFirstName());
+        }
+        if (getLastName() != null) {
+            if (!fullName.isEmpty()) {
+                fullName.append(" ");
+            }
+            fullName.append(getLastName());
+        }
+
+        return fullName.toString();
     }
 }

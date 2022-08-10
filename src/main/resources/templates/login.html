@@ -5,25 +5,23 @@
 <body>
 <header th:replace="fragments/commons::navigation"></header>
 
-User Login page. Both for ITs and Companies.
-<form class="container"
-        th:action="@{/users/login}"
-        th:method="post">
+<div class="signup-form">
+    <form
+            th:action="@{/users/login}"
+            th:method="post">
 
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <h2>Please sign in</h2>
 
-    <div class="form-group">
-        <input type="text" name="username" class="form-control" placeholder="username">
+        <div class="container form-group">
 
-    </div>
-    <div class="form-group">
-        <input type="password" name="password" class="form-control" placeholder="Password">
+            <input type="text" name="username" class="form-control" placeholder="username">
 
-    </div>
+            <input type="password" name="password" class="form-control" placeholder="Password">
 
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-
-</form>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        </div>
+    </form>
+</div>
 
 </body>
 <footer th:replace="fragments/commons::footer"></footer>

@@ -1,6 +1,5 @@
 package org.softuni.jobboard.service;
 
-import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
 import org.softuni.jobboard.model.dto.UserRegisterDTO;
 import org.softuni.jobboard.model.dto.UserUpdateDTO;
@@ -116,7 +115,6 @@ public class UserService {
         return userRoleEntitySet;
     }
 
-    @NotNull
     public List<TechStackEntity> getTechStackEntityList(List<String> techStackList) {
         List<TechStackEntity> userTechStackList = new ArrayList<>();
         for (String stack : techStackList) {
