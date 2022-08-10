@@ -23,7 +23,7 @@ public class UserUpdateDTO {
     private GenderEnum gender;
 
     private Set<String> role;
-    @NotNull
+    @NotEmpty
     private String level;
     @NotNull
     private List<String> techStack;

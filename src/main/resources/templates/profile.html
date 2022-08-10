@@ -128,9 +128,6 @@
                             <div class="col-md-12">
                                 <label for="level" class="labels">Level</label>
                                 <select class="form-control" id="level" name="level" th:errorclass="is-invalid">
-                                    <div class="invalid-feedback errors alert alert-danger">
-                                        Your experience level is required!
-                                    </div>
                                     <option value="">--select level--</option>
                                     <option th:each="l : ${T(org.softuni.jobboard.model.enums.LevelEnum).values()}"
                                             th:value="${l}"
@@ -139,6 +136,9 @@
                                     >Select level
                                     </option>
                                 </select>
+                                <div class="invalid-feedback errors alert alert-danger">
+                                    Your experience level is required!
+                                </div>
                             </div>
                             <br>
                             <div class="col-md-12">
