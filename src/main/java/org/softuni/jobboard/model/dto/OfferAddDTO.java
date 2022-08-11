@@ -9,7 +9,11 @@ public class OfferAddDTO {
 
     private UserEntity user;
 
+    private String position;
+
     private String title;
+
+    private String location;
 
     private String description;
 
@@ -33,12 +37,30 @@ public class OfferAddDTO {
         return this;
     }
 
+    public String getPosition() {
+        return position;
+    }
+
+    public OfferAddDTO setPosition(String position) {
+        this.position = position;
+        return this;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public OfferAddDTO setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public OfferAddDTO setLocation(String location) {
+        this.location = location;
         return this;
     }
 

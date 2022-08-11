@@ -4,6 +4,8 @@ import org.softuni.jobboard.model.enums.GenderEnum;
 import org.softuni.jobboard.model.enums.LevelEnum;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,15 +16,18 @@ import java.util.Set;
 public class UserEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
+    @Size(min = 4, max = 20)
     private String username;
 
     @Column(nullable = false)
+    @Size(min = 4)
     private String password;
 
     @Column(nullable = false, unique = true)
     private String email;
 
     @Column
+    @Min(18)
     private Integer age;
 
     @Enumerated(EnumType.STRING)
@@ -38,9 +43,11 @@ public class UserEntity extends BaseEntity {
     private List<TechStackEntity> techStack = new ArrayList<>();
 
     @Column(nullable = false)
+    @Size(min = 2, max = 20)
     private String firstName;
 
     @Column(nullable = false)
+    @Size(min = 2, max = 20)
     private String lastName;
 
     public UserEntity() {

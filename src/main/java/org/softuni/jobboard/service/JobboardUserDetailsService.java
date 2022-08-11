@@ -23,7 +23,7 @@ public class JobboardUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
                 .map(this::map)
-                .orElseThrow(()-> new UsernameNotFoundException("User " + username + " not found!"));
+                .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found!"));
     }
 
     private UserDetails map(UserEntity userEntity) {
@@ -34,6 +34,7 @@ public class JobboardUserDetailsService implements UserDetailsService {
                 userEntity.getUsername(),
                 userEntity.getFirstName(),
                 userEntity.getLastName(),
+                userEntity.getEmail(),
                 userEntity.
                         getRole().
                         stream().

@@ -3,6 +3,8 @@ package org.softuni.jobboard.model.entity;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.softuni.jobboard.model.enums.LevelEnum;
+import org.softuni.jobboard.model.enums.LocationEnum;
+import org.softuni.jobboard.model.enums.PositionEnum;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,8 +18,14 @@ public class OfferEntity extends BaseEntity {
     @ManyToOne
     private UserEntity user;
 
+    @Enumerated(EnumType.STRING)
+    private PositionEnum position;
+
     @Column(nullable = false)
     private String title;
+
+    @Enumerated(EnumType.STRING)
+    private LocationEnum location;
 
     @Column(nullable = false)
     private String description;
@@ -47,12 +55,30 @@ public class OfferEntity extends BaseEntity {
         return this;
     }
 
+    public PositionEnum getPosition() {
+        return position;
+    }
+
+    public OfferEntity setPosition(PositionEnum position) {
+        this.position = position;
+        return this;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public OfferEntity setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public LocationEnum getLocation() {
+        return location;
+    }
+
+    public OfferEntity setLocation(LocationEnum location) {
+        this.location = location;
         return this;
     }
 

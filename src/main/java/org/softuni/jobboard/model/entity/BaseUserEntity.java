@@ -4,25 +4,30 @@ import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
 @MappedSuperclass
-public abstract class BaseUserEntity extends BaseEntity{
+public abstract class BaseUserEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
+    @Size(min = 4, max = 20)
     private String username;
 
     @Column(nullable = false)
+    @Size(min = 4)
     private String password;
 
     @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
+    @Size(min = 2, max = 20)
     private String firstName;
 
     @Column(nullable = false)
+    @Size(min = 2, max = 20)
     private String lastName;
 
     @ManyToMany(fetch = FetchType.EAGER)

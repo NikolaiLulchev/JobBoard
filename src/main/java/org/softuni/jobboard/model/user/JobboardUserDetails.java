@@ -12,18 +12,21 @@ public class JobboardUserDetails implements UserDetails {
     private final String username;
     private final String firstName;
     private final String lastName;
+    private final String email;
     private final Collection<GrantedAuthority> authorities;
 
     public JobboardUserDetails(Long id, String password,
                                String username,
                                String firstName,
                                String lastName,
+                               String email,
                                Collection<GrantedAuthority> authorities) {
         this.id = id;
         this.password = password;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
         this.authorities = authorities;
     }
 
@@ -87,5 +90,9 @@ public class JobboardUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

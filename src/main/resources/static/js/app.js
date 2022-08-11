@@ -23,14 +23,6 @@ function onLoadUsers (event) {
 
       let profileLink = document.createElement('a')
 
-      // let roleArr = user.role
-      // roleArr.forEach((roleObj, i) => {
-      //   for (let key in roleObj) {
-      //
-      //     console.log(`${roleObj["role"]}`)
-      //   }
-      // })
-
       profileLink.setAttribute('href', `/users/profile/${user.id}`)
       profileLink.textContent = 'View Profile'
       profileLink.className = 'btn btn-primary'
