@@ -35,11 +35,11 @@
                                        class="form-control"
                                        placeholder="offer title"
                                        th:value="*{title}"
-                                       required="required">
+                                       required>
                             </div>
                             <div class="row mt-2">
                                 <label class="labels">Position</label>
-                                <select class="form-control" id="position" name="position">
+                                <select class="form-control" id="position" name="position" required>
                                     <option value="">--select position--</option>
                                     <option th:each="p : ${T(org.softuni.jobboard.model.enums.PositionEnum).values()}"
                                             th:value="${p}"
@@ -51,7 +51,7 @@
                             </div>
                             <div class="row mt-2">
                                 <label class="labels">Location</label>
-                                <select class="form-control" id="location" name="location">
+                                <select class="form-control" id="location" name="location" required>
                                     <option value="">--select location--</option>
                                     <option th:each="l : ${T(org.softuni.jobboard.model.enums.LocationEnum).values()}"
                                             th:value="${l}"
@@ -68,7 +68,7 @@
                                           class="form-control"
                                           placeholder="offer description"
                                           th:value="*{description}"
-                                          required="required"></textarea>
+                                          required></textarea>
                             </div>
                             <div class="mt-5 text-center">
                                 <button class="btn btn-primary profile-button" type="submit">Post Offer</button>
@@ -82,7 +82,7 @@
                             <br>
                             <div class="col-md-12">
                                 <label for="level" class="labels">Required Level</label>
-                                <select class="form-control" id="level" name="level">
+                                <select class="form-control" id="level" name="level" required>
                                     <option value="">--select level--</option>
                                     <option th:each="l : ${T(org.softuni.jobboard.model.enums.LevelEnum).values()}"
                                             th:value="${l}"

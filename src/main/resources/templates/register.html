@@ -5,7 +5,7 @@
 <body>
 <header th:replace="fragments/commons::navigation"></header>
 
-<div class="signup-form">
+<div class="signup-form container rounded bg-white mt-5 mb-5">
     <form
             th:action="@{/users/register}"
             th:method="post"
@@ -13,8 +13,7 @@
 
         <h2>Register</h2>
 
-        <div class="container form-group">
-            <p class="hint-text">Create your account. It's free and only takes a minute.</p>
+        <div class="container form-group ">
             <input
                     id="username"
                     th:field="*{username}"
