@@ -35,7 +35,7 @@ public class SecurityConfiguration {
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                 // everyone can login and register
                         antMatchers("/", "/home", "/about", "/users/login", "/users/register").permitAll().
-                antMatchers("/admin-panel").hasRole("ADMIN").
+                antMatchers("/admin-panel", "/api/**").hasRole("ADMIN").
                 antMatchers("/add-offer").hasRole("EMPLOYER").
                 // all other pages are available for logged-in users
                         anyRequest().

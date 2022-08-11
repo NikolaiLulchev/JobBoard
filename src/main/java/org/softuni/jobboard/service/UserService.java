@@ -124,16 +124,6 @@ public class UserService {
         return userTechStackList;
     }
 
-    public void initializeRoles() {
-        if (userRoleRepository.count() == 0) {
-            Arrays.stream(UserRoleEnum.values()).map(r -> {
-                UserRoleEntity userRoleEntity = new UserRoleEntity();
-                userRoleEntity.setRole(r);
-                return userRoleEntity;
-            }).forEach(userRoleRepository::save);
-        }
-    }
-
     public void initializeAdminUser() {
         Optional<UserEntity> optAdmin = userRepository.findByUsername("admin");
         if (optAdmin.isPresent()) {

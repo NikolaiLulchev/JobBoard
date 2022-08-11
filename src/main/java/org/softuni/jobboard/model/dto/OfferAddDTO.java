@@ -1,5 +1,6 @@
 package org.softuni.jobboard.model.dto;
 
+import org.softuni.jobboard.model.entity.CompanyEntity;
 import org.softuni.jobboard.model.entity.UserEntity;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,8 @@ public class OfferAddDTO {
     private String level;
 
     private List<String> techStack;
+
+    private CompanyEntity company;
 
     public OfferAddDTO() {
     }
@@ -106,6 +109,15 @@ public class OfferAddDTO {
 
     public OfferAddDTO setTechStack(List<String> techStack) {
         this.techStack = techStack;
+        return this;
+    }
+
+    public CompanyEntity getCompany() {
+        return company;
+    }
+
+    public OfferAddDTO setCompany(CompanyEntity company) {
+        this.company = company;
         return this;
     }
 }

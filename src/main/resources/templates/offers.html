@@ -11,19 +11,20 @@
              th:object="${offer}">
             <div class="category mb-30">
                 <div class="job">
-                    <span th:text="*{position}" class="colors2 mb-4">Position</span>
+                    <span th:text="'Position: '+ *{position}" class="colors2 mb-4">Position</span>
                     <h5><a th:href="@{/offers/details/{id}(id=*{id})}" th:text="*{title}">Title</a></h5>
-                    <span th:text="*{location}">Location</span>
+                    <span th:text="'Location: '+ *{location}">Location</span>
                     <div class="pricing d-flex justify-content-between align-items-center">
                         <div class="left">
-                            <p>Company</p>
+                            <p th:text="'Employer: ' + *{company.name}">Company</p>
                         </div>
                         <span th:text="${#temporals.format(offer.addedOn, 'dd-MM-yyyy')}" class="time">Added On</span>
                     </div>
+                    <a th:href="@{/offers/details/{id}(id=*{id})}" class="btn btn-primary">Details</a>
                 </div>
             </div>
         </div>
-        <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="col-12 d-flex align-items-center mt-3 justify-content-center">
             <div class="btn btn-primary mb-30">
                 <span>Find More</span>
             </div>

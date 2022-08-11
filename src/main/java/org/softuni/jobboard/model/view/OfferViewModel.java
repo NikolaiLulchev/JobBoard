@@ -1,5 +1,6 @@
 package org.softuni.jobboard.model.view;
 
+import org.softuni.jobboard.model.entity.CompanyEntity;
 import org.softuni.jobboard.model.entity.UserEntity;
 
 import java.time.LocalDateTime;
@@ -26,6 +27,8 @@ public class OfferViewModel {
     private String level;
 
     private List<String> techStack;
+
+    private CompanyEntity company;
 
     public OfferViewModel() {
     }
@@ -117,6 +120,15 @@ public class OfferViewModel {
 
     public OfferViewModel setPosition(String position) {
         this.position = position;
+        return this;
+    }
+
+    public CompanyEntity getCompany() {
+        return company;
+    }
+
+    public OfferViewModel setCompany(CompanyEntity company) {
+        this.company = company;
         return this;
     }
 }

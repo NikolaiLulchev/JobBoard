@@ -27,7 +27,7 @@ public class OfferEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private LocationEnum location;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String description;
 
     @Column(nullable = false)
@@ -42,6 +42,9 @@ public class OfferEntity extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<TechStackEntity> techStack = new ArrayList<>();
+
+    @ManyToOne(optional = false)
+    private CompanyEntity company;
 
     public OfferEntity() {
     }
@@ -124,6 +127,15 @@ public class OfferEntity extends BaseEntity {
 
     public OfferEntity setTechStack(List<TechStackEntity> techStack) {
         this.techStack = techStack;
+        return this;
+    }
+
+    public CompanyEntity getCompany() {
+        return company;
+    }
+
+    public OfferEntity setCompany(CompanyEntity company) {
+        this.company = company;
         return this;
     }
 }
