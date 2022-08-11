@@ -5,28 +5,20 @@
 <body>
 <header th:replace="fragments/commons::navigation"></header>
 
-<div class="container mb-5">
+<div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div th:each="offer: ${offers}" class="col-lg-4 col-md-6 col-sm-6"
              th:object="${offer}">
             <div class="category mb-30">
                 <div class="job">
-                    <span class="colors2 mb-4">Programming &amp; IT</span>
-                    <h5><a th:href="@{/offers/details/{id}(id=*{id})}" th:text="*{title}">Medical Assistant, East Valley Primary Care</a></h5>
-                    <ul class="place">
-                        <li>
-                            <p><i class="fas fa-map-marker-alt pe-2"></i> New York, USA</p>
-                        </li>
-                        <li>
-                            <p class="ps-5"><i class="fas fa-map-marker-alt pe-2"></i>Full Time</p>
-                        </li>
-                    </ul>
+                    <span th:text="*{position}" class="colors2 mb-4">Position</span>
+                    <h5><a th:href="@{/offers/details/{id}(id=*{id})}" th:text="*{title}">Title</a></h5>
+                    <span th:text="*{location}">Location</span>
                     <div class="pricing d-flex justify-content-between align-items-center">
                         <div class="left">
-                            <p>Globe Solution Ltd.</p>
+                            <p>Company</p>
                         </div>
-                        <span th:text="${#temporals.format(offer.addedOn, 'dd-MM-yyyy')}"
-                              class="time">2h ago</span>
+                        <span th:text="${#temporals.format(offer.addedOn, 'dd-MM-yyyy')}" class="time">Added On</span>
                     </div>
                 </div>
             </div>
@@ -34,7 +26,6 @@
         <div class="col-12 d-flex align-items-center justify-content-center">
             <div class="btn btn-primary mb-30">
                 <span>Find More</span>
-                <span class="fas fa-arrow-right"></span>
             </div>
         </div>
     </div>

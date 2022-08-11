@@ -18,8 +18,10 @@
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                             <img class="rounded-circle mt-5" width="150px"
                                  src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                            <span th:text="${offerViewModel.user.firstName} +' '+ ${offerViewModel.user.lastName}" class="font-weight-bold"></span>
+                            <span th:text="${offerViewModel.user.firstName} +' '+ ${offerViewModel.user.lastName}"
+                                  class="font-weight-bold"></span>
                             <span th:text="*{user.email}" class="text-black-50"></span>
+                            <span class="font-weight-bold">Company</span>
                             <span> </span>
                         </div>
                     </div>
@@ -30,12 +32,15 @@
                             </div>
                             <div class="row mt-2">
                                 <label class="labels">Title</label>
-                                <input type="text"
-                                       name="title"
-                                       class="form-control"
-                                       placeholder="offer title"
-                                       th:value="*{title}"
-                                       required="required">
+                                <span class="form-control" th:text="*{title}"></span>
+                            </div>
+                            <div class="row mt-2">
+                                <label class="labels">Position</label>
+                                <span class="form-control" th:text="*{position}"></span>
+                            </div>
+                            <div class="row mt-2">
+                                <label class="labels">Location</label>
+                                <span class="form-control" th:text="*{location}"></span>
                             </div>
                             <div class="row mt-3">
                                 <label class="labels">Description</label>
@@ -49,10 +54,8 @@
                             <div class="mt-5 text-center">
                                 <button class="btn btn-primary profile-button" type="submit">Post Offer</button>
                             </div>
-
                         </div>
                     </div>
-
                     <div class="col-md-4">
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center experience">
@@ -60,27 +63,15 @@
                             </div>
                             <br>
                             <div class="col-md-12">
-                                <label for="level" class="labels">Level</label>
-                                <select class="form-control" id="level" name="level">
-                                    <option value="">--select level--</option>
-                                    <option th:each="l : ${T(org.softuni.jobboard.model.enums.LevelEnum).values()}"
-                                            th:value="${l}"
-                                            th:text="${l}"
-                                            th:selected="${l.name()} == *{level}"
-                                    >Select level
-                                    </option>
-                                </select>
+                                <label class="labels">Level</label>
+                                <span class="form-control" th:text="*{level}"> </span>
                             </div>
                             <br>
                             <div class="col-md-12">
-                                <label for="tech-stack" class="labels">Tech Stack</label>
+                                <label class="labels">Required Tech Stack</label>
                                 <br>
-                                <th:block th:each="ts : ${T(org.softuni.jobboard.model.enums.TechStackEnum).values()}">
-                                    <input type="checkbox" name="techStack" id="tech-stack"
-                                           th:value="${ts}"
-                                           th:field="*{techStack}"/>
-                                    <label th:text="${ts}"></label>
-                                    <br/>
+                                <th:block th:each="ts : ${offerViewModel.techStack}">
+                                    <li th:text="${ts}"></li>
                                 </th:block>
                             </div>
                         </div>

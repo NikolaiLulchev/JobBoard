@@ -29,15 +29,6 @@
                                 <h4 class="text-right">Offer Details</h4>
                             </div>
                             <div class="row mt-2">
-                                <label class="labels">Position</label>
-                                <input type="text"
-                                       name="title"
-                                       class="form-control"
-                                       placeholder="offer title"
-                                       th:value="*{title}"
-                                       required="required">
-                            </div>
-                            <div class="row mt-2">
                                 <label class="labels">Title</label>
                                 <input type="text"
                                        name="title"
@@ -47,13 +38,28 @@
                                        required="required">
                             </div>
                             <div class="row mt-2">
+                                <label class="labels">Position</label>
+                                <select class="form-control" id="position" name="position">
+                                    <option value="">--select position--</option>
+                                    <option th:each="p : ${T(org.softuni.jobboard.model.enums.PositionEnum).values()}"
+                                            th:value="${p}"
+                                            th:text="${p}"
+                                            th:selected="${p.name()} == *{position}"
+                                    >Select level
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="row mt-2">
                                 <label class="labels">Location</label>
-                                <input type="text"
-                                       name="title"
-                                       class="form-control"
-                                       placeholder="offer title"
-                                       th:value="*{title}"
-                                       required="required">
+                                <select class="form-control" id="location" name="location">
+                                    <option value="">--select location--</option>
+                                    <option th:each="l : ${T(org.softuni.jobboard.model.enums.LocationEnum).values()}"
+                                            th:value="${l}"
+                                            th:text="${l}"
+                                            th:selected="${l.name()} == *{location}"
+                                    >Select level
+                                    </option>
+                                </select>
                             </div>
                             <div class="row mt-3">
                                 <label class="labels">Description</label>

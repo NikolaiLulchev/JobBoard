@@ -13,6 +13,10 @@ public class OfferViewModel {
 
     private String title;
 
+    private String location;
+
+    private String position;
+
     private String description;
 
     private LocalDateTime addedOn;
@@ -95,6 +99,24 @@ public class OfferViewModel {
 
     public OfferViewModel setTechStack(List<String> techStack) {
         this.techStack = techStack;
+        return this;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public OfferViewModel setLocation(String location) {
+        this.location = location;
+        return this;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public OfferViewModel setPosition(String position) {
+        this.position = position;
         return this;
     }
 }
