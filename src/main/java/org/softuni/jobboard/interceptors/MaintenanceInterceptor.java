@@ -15,7 +15,7 @@ public class MaintenanceInterceptor implements HandlerInterceptor {
                            HttpServletResponse response,
                            Object handler) throws Exception {
 
-    var requestURI = request.getRequestURI();
+    String requestURI = request.getRequestURI();
     if (!requestURI.equals("/maintenance")) {
       LocalTime now = LocalTime.now();
       if (now.getHour() >= 23) {
