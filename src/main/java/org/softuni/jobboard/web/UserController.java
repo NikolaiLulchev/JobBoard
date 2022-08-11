@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.softuni.jobboard.model.dto.UserUpdateDTO;
 import org.softuni.jobboard.model.entity.UserEntity;
 import org.softuni.jobboard.model.view.UserViewModel;
-import org.softuni.jobboard.service.TechStackService;
 import org.softuni.jobboard.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,12 +24,10 @@ public class UserController {
 
     private final UserService userService;
     private final ModelMapper modelMapper;
-    private final TechStackService techStackService;
 
-    public UserController(UserService userService, ModelMapper modelMapper, TechStackService techStackService) {
+    public UserController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;
-        this.techStackService = techStackService;
     }
 
     @GetMapping("/login")
@@ -78,9 +75,4 @@ public class UserController {
         userService.updateUser(user, userViewModel);
         return "redirect:/home";
     }
-
-//    @ModelAttribute("userViewModel")
-//    private UserViewModel userViewModel() {
-//        return new UserViewModel();
-//    }
 }

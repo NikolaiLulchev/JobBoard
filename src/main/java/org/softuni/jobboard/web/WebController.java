@@ -11,10 +11,11 @@ public class WebController {
         return "index";
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "home";
+    @GetMapping("/maintenance")
+    public String maintenance() {
+        return  "maintenance";
     }
+
 
 
 

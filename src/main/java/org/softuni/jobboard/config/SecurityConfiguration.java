@@ -1,5 +1,6 @@
 package org.softuni.jobboard.config;
 
+import org.softuni.jobboard.model.enums.UserRoleEnum;
 import org.softuni.jobboard.repository.UserRepository;
 import org.softuni.jobboard.service.JobboardUserDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -34,9 +35,9 @@ public class SecurityConfiguration {
                 // everyone can download static resources (css, js, images)
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                 // everyone can login and register
-                        antMatchers("/", "/home", "/about", "/users/login", "/users/register").permitAll().
-                antMatchers("/admin-panel", "/api/**").hasRole("ADMIN").
-                antMatchers("/add-offer").hasRole("EMPLOYER").
+                        antMatchers("/", "/about", "/users/login", "/users/register").permitAll().
+                antMatchers("/admin-panel", "/api/**").hasRole(UserRoleEnum.ADMIN.name()).
+                antMatchers("/add-offer").hasAnyRole(UserRoleEnum.EMPLOYER.name(),UserRoleEnum.ADMIN.name()).
                 // all other pages are available for logged-in users
                         anyRequest().
                 authenticated().
