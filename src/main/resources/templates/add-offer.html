@@ -20,6 +20,15 @@
                                  src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
                             <span th:text="${#authentication.principal.fullName}" class="font-weight-bold"></span>
                             <span th:text="${#authentication.principal.email}" class="text-black-50"></span>
+                            <div class="row mt-2">
+                                <label class="labels">Company</label>
+                                <input type="text"
+                                       name="company"
+                                       class="form-control"
+                                       placeholder="Company name"
+                                       th:value="*{company.name}"
+                                       required>
+                            </div>
                             <span> </span>
                         </div>
                     </div>

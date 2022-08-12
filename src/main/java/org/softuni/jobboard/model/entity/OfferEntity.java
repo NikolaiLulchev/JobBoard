@@ -44,7 +44,7 @@ public class OfferEntity extends BaseEntity {
     private List<TechStackEntity> techStack = new ArrayList<>();
 
     @ManyToOne(optional = false)
-    private CompanyEntity company;
+    private CompanyEntity company = new CompanyEntity();
 
     public OfferEntity() {
     }

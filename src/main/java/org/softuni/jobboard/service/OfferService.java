@@ -31,6 +31,7 @@ public class OfferService {
         offer.setTechStack(userService.getTechStackEntityList(offerModel.getTechStack()));
         offer.setUser(user);
         offer.setAddedOn(LocalDateTime.now());
+        offer.setCompany(offerModel.getCompany());
         offerRepository.save(offer);
     }
 
@@ -41,5 +42,11 @@ public class OfferService {
 
     public OfferEntity getOfferById(Long id) {
         return offerRepository.getById(id);
+    }
+
+    public void proceedOfferTask() {
+        LocalDateTime addedOn = LocalDateTime.now().minusDays(14);
+        offerRepository.findByAddedOnBefore(addedOn).
+                forEach((o-> o.setActive(false)));
     }
 }

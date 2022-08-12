@@ -44,3 +44,15 @@ function onLoadUsers (event) {
     })).
     catch(error => console.log('error', error))
 }
+
+function notImplemented () {
+  alert('This functionality require "Premium" account')
+
+  function getFooter () {
+    let footer = document.getElementById('footer')
+
+    footer.textContent = "HEllo"
+
+    console.log(footer)
+  }
+}

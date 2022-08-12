@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.stream.Collectors;
 
 @Controller
@@ -36,21 +35,11 @@ public class UserController {
     }
 
     @GetMapping("/profile/{id}")
-    public String loadProfile(@PathVariable Long id, Principal principal, Model model) {
-//        String username = principal.getName();
+    public String loadProfile(@PathVariable Long id, Model model) {
+
         UserEntity user = userService.getUserById(id);
         UserViewModel userViewModel = modelMapper.map(user, UserViewModel.class);
         userViewModel.setRole(user.getRole().stream().map(r -> r.getRole().name()).collect(Collectors.toSet()));
-//        UserViewModel userViewModel = new UserViewModel(
-//                user.getFirstName(),
-//                user.getLastName(),
-//                user.getEmail(),
-//                user.getAge(),
-//                user.getGender().name(),
-//                user.getRole().stream().map(r -> r.getRole().name()).collect(Collectors.toSet()),
-//                user.getLevel().name(),
-//                user.getTechStack().stream().map(ts -> ts.getTechStack().name()).collect(Collectors.toList())
-//        );
 
         if (!model.containsAttribute("userViewModel")) {
             model.addAttribute("userViewModel", userViewModel);

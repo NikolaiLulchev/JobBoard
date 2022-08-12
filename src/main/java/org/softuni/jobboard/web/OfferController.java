@@ -2,6 +2,7 @@ package org.softuni.jobboard.web;
 
 import org.modelmapper.ModelMapper;
 import org.softuni.jobboard.model.dto.OfferAddDTO;
+import org.softuni.jobboard.model.entity.CompanyEntity;
 import org.softuni.jobboard.model.entity.OfferEntity;
 import org.softuni.jobboard.model.view.OfferViewModel;
 import org.softuni.jobboard.service.OfferService;
@@ -44,7 +45,10 @@ public class OfferController {
     }
 
     @GetMapping("/add")
-    public String addOffer() {
+    public String addOffer(Model model) {
+        OfferAddDTO offerAddDTO = new OfferAddDTO();
+        offerAddDTO.setCompany(new CompanyEntity());
+        model.addAttribute("offerModel", offerAddDTO);
         return "add-offer";
     }
 
