@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,12 +27,14 @@ public class OfferService {
     }
 
     public void postOffer(Principal principal, OfferAddDTO offerModel) {
+
         UserEntity user = userService.getUser(principal.getName());
+
         OfferEntity offer = modelMapper.map(offerModel, OfferEntity.class);
         offer.setTechStack(userService.getTechStackEntityList(offerModel.getTechStack()));
         offer.setUser(user);
         offer.setAddedOn(LocalDateTime.now());
-        offer.setCompany(offerModel.getCompany());
+        offer.getCompany().setUsers(Set.of(user));
         offerRepository.save(offer);
     }
 

@@ -35,7 +35,8 @@ public class SecurityConfiguration {
                 // everyone can download static resources (css, js, images)
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                 // everyone can login and register
-                        antMatchers("/", "/home", "/about", "/users/login", "/users/register", "/maintenance").permitAll().
+                        antMatchers("/", "/home", "/about", "/maintenance").permitAll().
+                antMatchers("/users/login", "/users/register").anonymous().
                 antMatchers("/admin-panel", "/api/**").hasRole(UserRoleEnum.ADMIN.name()).
                 antMatchers("/add-offer").hasAnyRole(UserRoleEnum.EMPLOYER.name(), UserRoleEnum.ADMIN.name()).
                 // all other pages are available for logged-in users
