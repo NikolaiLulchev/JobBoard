@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/users")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 public class UserRestController {
 
     private final UserService userService;
@@ -20,7 +20,7 @@ public class UserRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserEntity>> getAllUsers(){
+    public ResponseEntity<List<UserEntity>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
