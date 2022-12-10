@@ -10,7 +10,7 @@ function onLoadUsers (event) {
   let usersContainer = document.getElementById('users-container')
   usersContainer.textContent = ''
 
-  fetch('http://localhost:8080/api/users/', requestOptions).
+  fetch('http://localhost:8080/api/v1/users/', requestOptions).
     then(response => response.json()).
     then(json => json.forEach(user => {
       // here we will create some elements and add them to the table.
@@ -48,11 +48,4 @@ function onLoadUsers (event) {
 function notImplemented () {
   alert('This functionality require "Premium" account')
 
-  function getFooter () {
-    let footer = document.getElementById('footer')
-
-    footer.textContent = "HEllo"
-
-    console.log(footer)
-  }
 }

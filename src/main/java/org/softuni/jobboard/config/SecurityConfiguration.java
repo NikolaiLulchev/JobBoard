@@ -12,8 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Configuration
+@CrossOrigin(origins = "http://localhost:4200")
 public class SecurityConfiguration {
 
     //Here we have to expose 3 things:
@@ -35,9 +37,10 @@ public class SecurityConfiguration {
                 // everyone can download static resources (css, js, images)
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                 // everyone can login and register
-                        antMatchers("/", "/home", "/about", "/maintenance").permitAll().
+                        antMatchers("/", "/home", "/about", "/maintenance", "/api/**").permitAll().
                 antMatchers("/users/login", "/users/register").anonymous().
-                antMatchers("/admin-panel", "/api/**").hasRole(UserRoleEnum.ADMIN.name()).
+//                antMatchers("/admin-panel", "/api/v1/**").hasRole(UserRoleEnum.ADMIN.name()).
+        antMatchers("/admin-panel").hasRole(UserRoleEnum.ADMIN.name()).
                 antMatchers("/add-offer").hasAnyRole(UserRoleEnum.EMPLOYER.name(), UserRoleEnum.ADMIN.name()).
                 // all other pages are available for logged-in users
                         anyRequest().
