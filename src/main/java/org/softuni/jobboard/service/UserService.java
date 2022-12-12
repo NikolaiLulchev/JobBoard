@@ -1,6 +1,7 @@
 package org.softuni.jobboard.service;
 
 import org.modelmapper.ModelMapper;
+import org.softuni.jobboard.model.dto.UserLoginDTO;
 import org.softuni.jobboard.model.dto.UserRegisterDTO;
 import org.softuni.jobboard.model.dto.UserUpdateDTO;
 import org.softuni.jobboard.model.entity.TechStackEntity;
@@ -140,5 +141,21 @@ public class UserService {
                 .setGender(GenderEnum.MALE)
                 .setRole(Set.of(adminRole));
         userRepository.save(admin);
+    }
+
+    public void login(UserLoginDTO userModel) {
+        UserDetails userDetails =
+                userDetailsService.loadUserByUsername(userModel.getUsername());
+
+        Authentication auth =
+                new UsernamePasswordAuthenticationToken(
+                        userDetails,
+                        userDetails.getPassword(),
+                        userDetails.getAuthorities()
+                );
+
+        SecurityContextHolder.
+                getContext().
+                setAuthentication(auth);
     }
 }

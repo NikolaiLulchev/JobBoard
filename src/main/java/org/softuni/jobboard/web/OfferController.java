@@ -15,6 +15,10 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.security.Principal;
 
+@CrossOrigin(
+        origins = "http://localhost:4200",
+        allowCredentials = "true"
+)
 @Controller
 @RequestMapping("/offers")
 public class OfferController {
