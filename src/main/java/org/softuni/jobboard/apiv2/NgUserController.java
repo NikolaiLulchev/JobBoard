@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @CrossOrigin(
         origins = "http://localhost:4200",
+        maxAge = 3600,
         allowCredentials = "true"
 )
 @RestController
@@ -48,7 +49,7 @@ public class NgUserController {
 //    @PostMapping("/login")
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody UserRegisterDTO userModel,
+    public ResponseEntity<?> register(@RequestBody @Valid UserRegisterDTO userModel,
                                       BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -61,21 +62,12 @@ public class NgUserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody UserLoginDTO userModel,
-                                   BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<?> login(@RequestBody @Valid UserLoginDTO userModel) {
 
         this.userService.login(userModel);
 
         return ResponseEntity.ok(userModel);
     }
 
-
-//    @GetMapping("/profile/{id}")
-
-
-//    @PatchMapping("/profile/{id}")
 
 }
