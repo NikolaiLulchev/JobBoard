@@ -23,6 +23,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -137,7 +138,7 @@ public class UserService {
                 .setFirstName("Admin")
                 .setLastName("Adminov")
                 .setEmail("admin@jobboard.com")
-                .setAge(41)
+                .setDateOfBirth(LocalDate.parse("1980-12-12"))
                 .setGender(GenderEnum.MALE)
                 .setRole(Set.of(adminRole));
         userRepository.save(admin);
@@ -157,5 +158,6 @@ public class UserService {
         SecurityContextHolder.
                 getContext().
                 setAuthentication(auth);
+        System.out.println("user" + userDetails.getUsername() + "logged in");
     }
 }

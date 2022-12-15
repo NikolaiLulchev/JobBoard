@@ -9,10 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-@CrossOrigin(
-        origins = "http://localhost:4200",
-        allowCredentials = "true"
-)
+
 @Controller
 @RequestMapping("/users")
 public class UserRegistrationController {

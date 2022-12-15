@@ -29,13 +29,13 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.cors().and().
+        http.
                 // define which requests are allowed and which not
                 authorizeRequests().
                 // everyone can download static resources (css, js, images)
                 requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                 // everyone can login and register
-                antMatchers("/", "/home", "/about", "/maintenance", "/api/v2/**").permitAll().
+                antMatchers("/", "/home", "/about", "/maintenance").permitAll().
                 antMatchers("/users/login", "/users/register").anonymous().
                 antMatchers("/admin-panel", "/api/v1/**").hasRole(UserRoleEnum.ADMIN.name()).
                 antMatchers("/admin-panel").hasRole(UserRoleEnum.ADMIN.name()).

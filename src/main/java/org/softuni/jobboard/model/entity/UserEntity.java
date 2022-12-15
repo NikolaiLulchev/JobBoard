@@ -4,8 +4,9 @@ import org.softuni.jobboard.model.enums.GenderEnum;
 import org.softuni.jobboard.model.enums.LevelEnum;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,9 +27,20 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column
-    @Min(18)
+    @Transient
     private Integer age;
+
+    @Column(nullable = false)
+    private LocalDate dateOfBirth;
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public UserEntity setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+        return this;
+    }
 
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
@@ -91,7 +103,7 @@ public class UserEntity extends BaseEntity {
     }
 
     public Integer getAge() {
-        return age;
+        return Period.between(this.dateOfBirth, LocalDate.now()).getYears();
     }
 
     public UserEntity setAge(Integer age) {
